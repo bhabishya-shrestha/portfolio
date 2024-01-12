@@ -1,0 +1,28 @@
+body {
+  margin: 0px;
+  font-family: "SoDo Sans SemiBold", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+}
+.navbar {
+  padding: 20px;
+  font-size: 14px;
+}
+
+.navbar-left img.navbar-logo {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.navbar-left div {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-left > * {
+  padding: 10px;
+}
