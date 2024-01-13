@@ -351,7 +351,15 @@ img {
 .skills__level {
   font-size: var(--smaller-font-size);
 }
+
 /* Hide and show projects & skills */
+.filters [data-content] {
+  display: none;
+}
+
+.filters__active[data-content] {
+  display: grid;
+}
 
 /* Activate button filter */
 
