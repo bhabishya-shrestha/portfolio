@@ -7,7 +7,7 @@
     <!--=============== FAVICON ===============-->
     <link
       rel="shortcut icon"
-      href="./assets/img/favicon.png"
+      href="./assets/img/favicon.jpeg"
       type="image/x-icon"
     />
 
@@ -19,7 +19,7 @@
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="./assets/css/styles.css" />
 
-    <title>Mini portfolio website - Bedimcode</title>
+    <title>Bhabishya's Portfolio</title>
   </head>
   <body>
     <!--=============== HEADER PROFILE ===============-->
@@ -86,11 +86,91 @@
     <main class="main">
       <section class="filters container">
         <!--=============== FILTERS TABS ===============-->
-
+        <ul class="filters__content">
+          <button class="filters__button" data-target="#projects">
+            Projects
+          </button>
+          <button class="filters__button" data-target="#skills">Skills</button>
+        </ul>
         <div class="filters__sections">
           <!--=============== PROJECTS ===============-->
+          <div class="projects__content grid" data-content id="projects">
+            <article class="projects__card">
+              <img src="assets/img/project1.png" alt="" class="projects__img" />
 
+              <div class="projects__modal">
+                <div>
+                  <span class="projects__subtitle">Web & Mobile </span>
+                  <h3 class="projects__title">Catering Web-App</h3>
+                  <a href="#" class="projects__button button button__small">
+                    <i class="ri-link"></i>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="projects__card">
+              <img src="assets/img/project2.png" alt="" class="projects__img" />
+
+              <div class="projects__modal">
+                <div>
+                  <span class="projects__subtitle"> Web & ML </span>
+                  <h3 class="projects__title">Brain Cancer Research Chatbot</h3>
+                  <a href="#" class="projects__button button button__small">
+                    <i class="ri-link"></i>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="projects__card">
+              <img src="assets/img/project3.png" alt="" class="projects__img" />
+
+              <div class="projects__modal">
+                <div>
+                  <span class="projects__subtitle"> Embedded Systems</span>
+                  <h3 class="projects__title">
+                    Automated Motherboard Identification
+                  </h3>
+                  <a href="#" class="projects__button button button__small">
+                    <i class="ri-link"></i>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="projects__card">
+              <img src="assets/img/project4.jpg" alt="" class="projects__img" />
+
+              <div class="projects__modal">
+                <div>
+                  <span class="projects__subtitle">Embedded Systems</span>
+                  <h3 class="projects__title">
+                    Arduino Robotic Arm Project Manager
+                  </h3>
+                  <a href="#" class="projects__button button button__small">
+                    <i class="ri-link"></i>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- <article class="projects__card">
+              <img src="assets/img/project1.png" alt="" class="projects__img" />
+
+              <div class="projects__modal">
+                <div>
+                  <span class="projects__subtitle"></span>
+                  <h3 class="projects__title"></h3>
+                  <a href="#" class="projects__button_button button__small">
+                    <i class="ri-link"></i>
+                  </a>
+                </div>
+              </div>
+            </article> -->
+          </div>
           <!--=============== SKILLS ===============-->
+          <div class="skills__content grid" data-content id="skills"></div>
         </div>
       </section>
     </main>
