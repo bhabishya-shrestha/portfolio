@@ -12,17 +12,17 @@ const GitHubLogo = (props) => {
   useEffect(() => {
     if (hovered) {
       gsap.to(group.current.scale, {
-        x: 1.1,
-        y: 1.1,
-        z: 1.1,
+        x: 2.1,
+        y: 2.1,
+        z: 2.1,
         duration: 0.5,
         ease: "elastic.out(1, 0.3)",
       });
     } else {
       gsap.to(group.current.scale, {
-        x: 1,
-        y: 1,
-        z: 1,
+        x: 2,
+        y: 2,
+        z: 2,
         duration: 0.5,
         ease: "elastic.out(1, 0.3)",
       });
@@ -39,7 +39,7 @@ const GitHubLogo = (props) => {
           <group
             // position={[6.5, -2.5, 8]}
             rotation={[Math.PI / 2, 0, 0.5]}
-            scale={28.364}
+            scale={40}
           >
             <mesh
               castShadow

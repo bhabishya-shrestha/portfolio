@@ -1,77 +1,43 @@
+import React, { Suspense, useEffect, useState } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
 import { PerspectiveCamera } from "@react-three/drei";
-import React, { Suspense, useEffect } from "react";
 import CoderRoom from "../components/CoderRoom";
 import CanvasLoader from "../components/CanvasLoader";
-import { Canvas } from "@react-three/fiber";
 import "../index.css";
 
-import { useMediaQuery } from "react-responsive";
 import { calculateSizes } from "../constants";
 import ReactIcon from "../components/ReactIcon";
 import PythonLogo from "../components/PythonLogo";
 import GitHubLogo from "../components/GitHubLogo";
 import ChatBot from "../components/ChatBot";
 import ErrorBoundary from "../components/ErrorBoundary";
+import HeroCamera from "../components/HeroCamera";
+import Button from "../components/Button";
 
 const Hero = () => {
-  const isSmall = useMediaQuery({ maxWidth: 440 });
-  const isMobile = useMediaQuery({ maxWidth: 768 });
-  const isTablet = useMediaQuery({ minWidth: 678, maxWidth: 1024 });
-  const isLargeDesktop = useMediaQuery({ minWidth: 1280 });
+  // State variables to track window dimensions
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
-  const sizes = calculateSizes(isSmall, isMobile, isTablet, isLargeDesktop);
-
-  const iconScale = isSmall
-    ? 0.4
-    : isMobile
-    ? 0.45
-    : isLargeDesktop
-    ? 0.8
-    : 0.6;
-  const pythonLogo = isSmall
-    ? 0.4
-    : isMobile
-    ? 0.45
-    : isLargeDesktop
-    ? 0.1
-    : 0.05;
-  const chatBot = isSmall ? 0.4 : isMobile ? 0.45 : isLargeDesktop ? 0.75 : 0.6;
-
-  // Adjust camera settings based on screen size
-  const cameraSettings = {
-    position: isSmall
-      ? [0, 0, 50]
-      : isMobile
-      ? [0, 0, 40]
-      : isLargeDesktop
-      ? [0, 0, 30]
-      : [0, 0, 35],
-    fov: isSmall ? 80 : isMobile ? 75 : isLargeDesktop ? 70 : 75,
-  };
-
+  // Update window dimensions on resize
   useEffect(() => {
-    let canvas;
-    const handleContextLost = (event) => {
-      console.warn("WebGL context lost:", event);
-      event.preventDefault();
-    };
-    const handleContextRestored = () => {
-      console.log("WebGL context restored");
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      setWindowHeight(window.innerHeight);
     };
 
-    const onCanvasCreated = ({ gl }) => {
-      canvas = gl.domElement;
-      canvas.addEventListener("contextlost", handleContextLost);
-      canvas.addEventListener("contextrestored", handleContextRestored);
-    };
-
-    return () => {
-      if (canvas) {
-        canvas.removeEventListener("contextlost", handleContextLost);
-        canvas.removeEventListener("contextrestored", handleContextRestored);
-      }
-    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Calculate sizes based on window dimensions
+  const sizes = calculateSizes(windowWidth, windowHeight);
+
+  // Adjust camera settings dynamically
+  const cameraSettings = {
+    position: [0, 0, sizes.cameraZ],
+    fov: sizes.fov,
+  };
 
   return (
     <section className="min-h-screen w-full flex flex-col relative">
@@ -91,7 +57,6 @@ const Hero = () => {
               const canvas = gl.domElement;
               canvas.addEventListener("contextlost", (event) => {
                 console.warn("WebGL context lost:", event);
-                // Do not call event.preventDefault();
               });
               canvas.addEventListener("contextrestored", () => {
                 console.log("WebGL context restored");
@@ -104,34 +69,40 @@ const Hero = () => {
                 position={cameraSettings.position}
                 fov={cameraSettings.fov}
               />
+              <CameraUpdater />
               <group>
                 <ErrorBoundary>
-                  <CoderRoom
-                    position={sizes.deskPosition}
-                    rotation={[0, -Math.PI, 0]}
-                    scale={sizes.deskScale}
-                  />
+                  <HeroCamera>
+                    <CoderRoom
+                      position={sizes.deskPosition}
+                      rotation={[0, -Math.PI, 0]}
+                      scale={sizes.deskScale}
+                    />
+                  </HeroCamera>
                 </ErrorBoundary>
                 <ErrorBoundary>
                   <ReactIcon
                     position={sizes.iconPosition}
-                    scale={iconScale}
+                    scale={sizes.iconScale}
                     rotation={[-0.2, -0.2, 0]}
                   />
                 </ErrorBoundary>
                 <ErrorBoundary>
                   <PythonLogo
                     position={sizes.pythonLogoPosition}
-                    scale={pythonLogo}
+                    scale={sizes.pythonLogoScale}
                   />
                 </ErrorBoundary>
                 <ErrorBoundary>
-                  <GitHubLogo position={sizes.gitHubLogoPosition} />
+                  <GitHubLogo
+                    position={sizes.gitHubLogoPosition}
+                    scale={sizes.gitHubLogoScale}
+                  />
                 </ErrorBoundary>
                 <ErrorBoundary>
                   <ChatBot
                     position={sizes.chatBotPosition}
-                    scale={chatBot}
+                    scale={sizes.chatBotScale}
                     rotation={[0.1, 0.4, 0]}
                   />
                 </ErrorBoundary>
@@ -142,8 +113,28 @@ const Hero = () => {
           </Canvas>
         </ErrorBoundary>
       </div>
+      <div className="absolute bottom-7 left-0 right-0 w-full z-10 c-space">
+        <a href="#contact" className="w-fit">
+          <Button
+            name="Contact Me"
+            isBeam
+            containerClass="sm:w-fit w-full sm:min-w-96"
+          />
+        </a>
+      </div>
     </section>
   );
+};
+
+const CameraUpdater = () => {
+  const { camera, size } = useThree();
+
+  useEffect(() => {
+    camera.aspect = size.width / size.height;
+    camera.updateProjectionMatrix();
+  }, [camera, size]);
+
+  return null;
 };
 
 export default Hero;

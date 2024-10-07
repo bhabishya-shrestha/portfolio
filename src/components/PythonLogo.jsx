@@ -4,25 +4,25 @@ import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import gsap from "gsap";
 
 const PythonLogo = (props) => {
-  const groupRef = useRef();
+  const group = useRef();
   const { nodes, materials } = useGLTF("models/python.glb");
   const [hovered, setHovered] = useState(false);
 
-  // Hover scaling effect
+  // Hover scaling effect similar to GitHubLogo
   useEffect(() => {
     if (hovered) {
-      gsap.to(groupRef.current.scale, {
-        x: 11,
-        y: 11,
-        z: 11,
+      gsap.to(group.current.scale, {
+        x: 1.1,
+        y: 1.1,
+        z: 1.1,
         duration: 0.5,
         ease: "elastic.out(1, 0.3)",
       });
     } else {
-      gsap.to(groupRef.current.scale, {
-        x: 10,
-        y: 10,
-        z: 10,
+      gsap.to(group.current.scale, {
+        x: 1,
+        y: 1,
+        z: 1,
         duration: 0.5,
         ease: "elastic.out(1, 0.3)",
       });
@@ -31,21 +31,22 @@ const PythonLogo = (props) => {
 
   return (
     <group
-      ref={groupRef}
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
-      {...props}
-      dispose={null}
     >
-      <Float speed={4} rotationIntensity={1.5} floatIntensity={0.5}>
-        <group scale={0.004}>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Python_Python_0.geometry}
-            material={materials.Python}
+      <Float speed={1} rotationIntensity={1.5} floatIntensity={1}>
+        <group {...props} ref={group} dispose={null}>
+          <group
             rotation={[1.5, -3.1, -2.5]}
-          />
+            scale={0.05} // Adjust this value as needed
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Python_Python_0.geometry}
+              material={materials.Python}
+            />
+          </group>
         </group>
       </Float>
 
