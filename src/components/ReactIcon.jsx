@@ -1,24 +1,58 @@
-// Target.jsx
 import * as THREE from "three";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import { Trail, Float, Line, Sphere, Stars } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useFrame } from "@react-three/fiber";
+import gsap from "gsap";
 
-export default function ReactIcon(props) {
+const ReactIcon = (props) => {
+  const hoverGroupRef = useRef();
+  const [hovered, setHovered] = useState(false);
+
+  // Hover scaling effect
+  useEffect(() => {
+    if (hovered) {
+      gsap.to(hoverGroupRef.current.scale, {
+        x: 0.88,
+        y: 0.88,
+        z: 0.88,
+        duration: 0.5,
+        ease: "elastic.out(1, 0.3)",
+      });
+    } else {
+      gsap.to(hoverGroupRef.current.scale, {
+        x: 0.8,
+        y: 0.8,
+        z: 0.8,
+        duration: 0.5,
+        ease: "elastic.out(1, 0.3)",
+      });
+    }
+  }, [hovered]);
+
   return (
     <group {...props}>
-      <Float speed={4} rotationIntensity={1} floatIntensity={2}>
-        <Atom />
-      </Float>
+      {/* Stars component outside of the hover effect */}
       <Stars saturation={0} count={400} speed={0.5} radius={100} />
 
+      {/* Group with hover scaling effect applied */}
+      <group
+        ref={hoverGroupRef}
+        onPointerEnter={() => setHovered(true)}
+        onPointerLeave={() => setHovered(false)}
+      >
+        <Float speed={4} rotationIntensity={1} floatIntensity={2}>
+          <Atom />
+        </Float>
+      </group>
+
+      {/* Optional bloom effect for glowing */}
       <EffectComposer>
         <Bloom mipmapBlur luminanceThreshold={1} radius={0.7} />
       </EffectComposer>
     </group>
   );
-}
+};
 
 function Atom(props) {
   const points = useMemo(
@@ -93,3 +127,5 @@ function Electron({ radius = 2.75, speed = 6, ...props }) {
     </group>
   );
 }
+
+export default ReactIcon;

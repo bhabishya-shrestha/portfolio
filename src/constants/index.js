@@ -1,3 +1,5 @@
+import GitHubLogo from "../components/GitHubLogo";
+
 export const navLinks = [
   {
     id: 1,
@@ -238,38 +240,42 @@ export const myProjects = [
   },
 ];
 
-export const calculateSizes = (isSmall, isMobile, isTablet) => {
+export const calculateSizes = (isSmall, isMobile, isTablet, isLargeDesktop) => {
   return {
-    deskScale: isSmall ? 0.05 : isMobile ? 0.06 : 0.065,
-    deskPosition: isMobile ? [0.5, -4.5, 0] : [0.25, -5.5, 0],
-    cubePosition: isSmall
-      ? [4, -5, 0]
+    deskScale: isSmall ? 0.05 : isMobile ? 0.06 : isLargeDesktop ? 0.08 : 0.065,
+    deskPosition: isMobile
+      ? [0.5, -4.5, 0]
+      : isLargeDesktop
+      ? [0.25, -6, 0]
+      : [0.25, -5.5, 0],
+    iconPosition: isSmall
+      ? [-5, 6, -5]
       : isMobile
-      ? [5, -5, 0]
-      : isTablet
-      ? [5, -5, 0]
-      : [9, -5.5, 0],
-    reactLogoPosition: isSmall
-      ? [3, 4, 0]
+      ? [-8, 6, -5]
+      : isLargeDesktop
+      ? [12, 8, -5]
+      : [10, 6, -5],
+    pythonLogoPosition: isSmall
+      ? [3, 10, 0]
       : isMobile
       ? [5, 4, 0]
-      : isTablet
-      ? [5, 4, 0]
-      : [12, 3, 0],
-    ringPosition: isSmall
-      ? [-5, 7, 0]
+      : isLargeDesktop
+      ? [-10, 7, 0]
+      : [-7.5, 5, 0],
+    gitHubLogoPosition: isSmall
+      ? [-5, 6, -5]
       : isMobile
-      ? [-10, 10, 0]
-      : isTablet
-      ? [-12, 10, 0]
-      : [-24, 10, 0],
-    targetPosition: isSmall
-      ? [-5, -10, -10]
+      ? [-8, 6, -5]
+      : isLargeDesktop
+      ? [7.5, -3, 10]
+      : [6.5, -2.5, 8],
+    chatBotPosition: isSmall
+      ? [-5, 6, -5]
       : isMobile
-      ? [-9, -10, -10]
-      : isTablet
-      ? [-11, -7, -10]
-      : [-13, -13, -10],
+      ? [-8, 6, -5]
+      : isLargeDesktop
+      ? [-10, -5, 0]
+      : [-9.5, -4, 0],
   };
 };
 
