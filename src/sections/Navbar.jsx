@@ -3,7 +3,7 @@ import { navLinks } from "../constants/index.js";
 
 const NavItems = () => {
   return (
-    <ul ul className="nav-ul">
+    <ul className="nav-ul">
       {navLinks.map(({ id, href, name }) => (
         <li className="nav-li" key={id}>
           <a href={href} className="nav-li-a" onClick={() => {}}>
