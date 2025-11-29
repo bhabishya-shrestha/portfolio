@@ -142,7 +142,7 @@ function App() {
                <div>
                 <h4 className="text-sm font-medium text-[rgb(var(--text-secondary))] uppercase tracking-wider mb-2">Databases</h4>
                 <div className="flex flex-wrap gap-2">
-                  {["PostgreSQL", "MySQL", "DynamoDB", "MongoDB"].map(skill => (
+                  {["PostgreSQL", "MSSQL", "DynamoDB", "MongoDB"].map(skill => (
                     <span key={skill} className="rounded-full bg-[rgb(var(--bg-secondary))] px-3 py-1 text-sm text-[rgb(var(--text-primary))]">
                       {skill}
                     </span>
