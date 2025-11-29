@@ -1,18 +1,23 @@
+import { useState } from 'react';
 import Layout from './components/Layout';
 import LeftPanel from './components/LeftPanel';
 import RightPanel from './components/RightPanel';
 import Section from './components/Section';
 import ExperienceCard from './components/ExperienceCard';
 import ProjectCard from './components/ProjectCard';
+import ProjectDetailsModal from './components/ProjectDetailsModal';
+import { projects, type Project } from './data/projects';
 
 function App() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
   return (
     <Layout>
       <LeftPanel />
       <RightPanel>
         <Section id="about" title="About" className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
            <p className="mb-4 text-[rgb(var(--text-secondary))] leading-relaxed">
-            I am a software engineer with a strong foundation in both <strong>mobile and full-stack development</strong>. 
+            I am a computer engineer with a strong foundation in both <strong>mobile and full-stack development</strong>. 
             Currently, I work as a <strong>Site Reliability Engineer at Visa</strong>, where I focus on AI-driven predictive analytics to forecast database health anomalies and optimize system reliability.
           </p>
           <p className="mb-4 text-[rgb(var(--text-secondary))] leading-relaxed">
@@ -97,33 +102,16 @@ function App() {
 
         <Section id="projects" title="Projects">
           <div className="flex flex-col gap-12">
-             <ProjectCard 
-              title="Breast Cancer Research RAG Chatbot"
-              description={[
-                "Integrated OpenAI-based LLM models with FastAPI to offer quick, data-backed responses.",
-                "Built a secure React front end connected to AWS S3 for knowledge base and Cognito for authentication."
-              ]}
-              skills={["React", "FastAPI", "OpenAI", "AWS S3", "RAG"]}
-              link="https://qoltbot.netlify.app/"
-            />
-            <ProjectCard 
-              title="Aura Finance"
-              description={[
-                "Architected a full-stack personal finance dashboard using React, Vite, and Supabase.",
-                "Implemented secure OAuth and real-time data sync with Supabase Auth and RLS."
-              ]}
-              skills={["React", "Vite", "Supabase", "PostgreSQL", "Tailwind"]}
-              link="https://aura-finance-tool.vercel.app/"
-            />
-            <ProjectCard 
-              title="Motherboard Identifier"
-              description={[
-                "Engineered an automated inspection tool in Python using OpenCV and Tesseract (100% accuracy on 300+ images).",
-                "Packaged pipeline into a cross‑platform CLI for batch processing."
-              ]}
-              skills={["Python", "OpenCV", "Tesseract", "CLI", "Computer Vision"]}
-              link="https://tinyurl.com/motherboard-inspector"
-            />
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                title={project.title}
+                description={project.description}
+                skills={project.techStack}
+                image={project.media.heroImage}
+                onClick={() => setSelectedProject(project)}
+              />
+            ))}
           </div>
         </Section>
 
@@ -171,6 +159,11 @@ function App() {
           </p>
         </footer>
       </RightPanel>
+      
+      <ProjectDetailsModal 
+        project={selectedProject} 
+        onClose={() => setSelectedProject(null)} 
+      />
     </Layout>
   );
 }

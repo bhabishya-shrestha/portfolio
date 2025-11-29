@@ -33,7 +33,7 @@ export default function LeftPanel() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-3 text-lg font-medium tracking-tight text-[rgb(var(--text-primary))] sm:text-xl"
         >
-          Site Reliability Engineer | Mobile & Full Stack Developer
+          Engineer 
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0, x: -20 }}

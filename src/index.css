@@ -35,6 +35,24 @@
   h1, h2, h3, h4, h5, h6 {
     @apply tracking-tight font-bold;
   }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-400/50 dark:bg-zinc-600/50 rounded-full hover:bg-zinc-400 dark:hover:bg-zinc-600 transition-colors;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
 }
 
 @layer utilities {
