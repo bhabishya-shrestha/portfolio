@@ -69,7 +69,8 @@ export const projects: Project[] = [
     ],
     techStack: ["React", "FastAPI", "OpenAI API", "Langchain", "ChromaDB", "AWS Lambda", "Docker", "PostgreSQL"],
     links: {
-      demo: "https://qoltbot.netlify.app/"
+      demo: "https://qoltbot.netlify.app/",
+      demoLabel: "View Live Website"
     },
     media: {
       heroImage: "/assets/qoltbot/thumbnail.png",
@@ -103,11 +104,11 @@ export const projects: Project[] = [
     tagline: 'Personal Finance Management',
     role: 'Lead Architect',
     description: [
-      "Architected a full-stack personal finance dashboard using React, Vite, and Supabase.",
-      "Implemented secure OAuth, real-time analytics, and a beautiful Apple-inspired design."
+      "Architected a local-first personal finance dashboard using React, Dexie.js, and Firebase.",
+      "Implemented offline-first data sync, real-time analytics, and a beautiful Apple-inspired design."
     ],
-    about: "Aura Finance is a modern personal finance management application built with React, featuring real-time analytics and a beautiful Apple-inspired design. It allows users to track net worth, categorize transactions, and visualize spending habits without selling their data.",
-    useCase: "Users want a clean, ad-free way to manage their money. Aura provides a 'single pane of glass' for all financial accounts with powerful categorization rules and export capabilities.",
+    about: "Aura Finance is a modern personal finance management application built with React, featuring a local-first architecture for instant interactions and offline capability. It allows users to track net worth, categorize transactions, and visualize spending habits with data stored securely on their device and synced to the cloud.",
+    useCase: "Users want a clean, ad-free way to manage their money that works instantly even without internet. Aura provides a 'single pane of glass' for all financial accounts with powerful categorization rules and export capabilities.",
     technicalSections: [
       {
         title: "Financial Management",
@@ -118,13 +119,14 @@ export const projects: Project[] = [
         content: "Clean, modern interface with glassmorphism effects. Seamless theme switching (Dark/Light) with persistent preferences. Responsive design optimized for desktop, tablet, and mobile devices."
       },
       {
-        title: "Security & Architecture",
-        content: "Built on the Supabase stack (PostgreSQL + Auth + Realtime). Secure login and registration system with custom JWT-based auth. Row Level Security (RLS) ensures strict data isolation between users."
+        title: "Local-First Architecture",
+        content: "Built on a Local-First architecture using Dexie.js (IndexedDB) for instant client-side storage and Firebase for background synchronization. This ensures the app works perfectly offline and feels native-app fast, while still keeping data backed up across devices."
       }
     ],
-    techStack: ["React", "Vite", "Tailwind CSS", "Zustand", "Supabase", "PostgreSQL", "Recharts", "Vitest"],
+    techStack: ["React", "Vite", "Tailwind CSS", "Zustand", "Dexie.js", "Firebase", "Recharts", "Vitest"],
     links: {
-      demo: "https://aura-finance-tool.vercel.app/"
+      demo: "https://aura-finance-tool.vercel.app/",
+      demoLabel: "View Live Website"
     },
     media: {
       heroImage: "/assets/aura-finance/thumbnail.png",

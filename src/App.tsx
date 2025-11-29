@@ -8,6 +8,26 @@ import ProjectCard from './components/ProjectCard';
 import ProjectDetailsModal from './components/ProjectDetailsModal';
 import { projects, type Project } from './data/projects';
 
+// Skill URL Mapping
+const SKILL_URLS: Record<string, string> = {
+  'Python': 'https://www.python.org',
+  'JavaScript/TypeScript': 'https://www.typescriptlang.org',
+  'Kotlin': 'https://kotlinlang.org',
+  'NodeJS': 'https://nodejs.org',
+  'React': 'https://react.dev',
+  'Jetpack Compose': 'https://developer.android.com/jetpack/compose',
+  'GraphQL': 'https://graphql.org',
+  'AWS (Lambda, S3, DynamoDB, Cognito)': 'https://aws.amazon.com',
+  'Git': 'https://git-scm.com',
+  'Jenkins': 'https://www.jenkins.io',
+  'CI/CD': 'https://www.redhat.com/en/topics/devops/what-is-ci-cd',
+  'Linux/UNIX': 'https://www.kernel.org',
+  'PostgreSQL': 'https://www.postgresql.org',
+  'MSSQL': 'https://www.microsoft.com/sql-server',
+  'DynamoDB': 'https://aws.amazon.com/dynamodb',
+  'MongoDB': 'https://www.mongodb.com',
+};
+
 function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -122,31 +142,67 @@ function App() {
               <div>
                 <h4 className="text-sm font-medium text-[rgb(var(--text-secondary))] uppercase tracking-wider mb-2">Languages & Frameworks</h4>
                 <div className="flex flex-wrap gap-2">
-                  {["Python", "JavaScript/TypeScript", "Kotlin", "NodeJS", "React", "Jetpack Compose", "GraphQL"].map(skill => (
-                    <span key={skill} className="rounded-full bg-[rgb(var(--bg-secondary))] px-3 py-1 text-sm text-[rgb(var(--text-primary))]">
-                      {skill}
-                    </span>
-                  ))}
+                  {["Python", "JavaScript/TypeScript", "Kotlin", "NodeJS", "React", "Jetpack Compose", "GraphQL"].map(skill => {
+                    const url = SKILL_URLS[skill];
+                    const Tag = url ? 'a' : 'span';
+                    return (
+                      <Tag 
+                        key={skill} 
+                        href={url}
+                        target={url ? "_blank" : undefined}
+                        rel={url ? "noopener noreferrer" : undefined}
+                        className={`rounded-full bg-[rgb(var(--bg-secondary))] px-3 py-1 text-sm text-[rgb(var(--text-primary))] transition-all ${
+                          url ? 'hover:bg-[rgb(var(--accent))]/10 hover:text-[rgb(var(--accent))] hover:scale-105 cursor-pointer' : ''
+                        }`}
+                      >
+                        {skill}
+                      </Tag>
+                    );
+                  })}
                 </div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-[rgb(var(--text-secondary))] uppercase tracking-wider mb-2">Cloud & DevOps</h4>
                 <div className="flex flex-wrap gap-2">
-                  {["AWS (Lambda, S3, DynamoDB, Cognito)", "Git", "Jenkins", "CI/CD", "Linux/UNIX"].map(skill => (
-                    <span key={skill} className="rounded-full bg-[rgb(var(--bg-secondary))] px-3 py-1 text-sm text-[rgb(var(--text-primary))]">
-                      {skill}
-                    </span>
-                  ))}
+                  {["AWS (Lambda, S3, DynamoDB, Cognito)", "Git", "Jenkins", "CI/CD", "Linux/UNIX"].map(skill => {
+                    const url = SKILL_URLS[skill];
+                    const Tag = url ? 'a' : 'span';
+                    return (
+                      <Tag 
+                        key={skill} 
+                        href={url}
+                        target={url ? "_blank" : undefined}
+                        rel={url ? "noopener noreferrer" : undefined}
+                        className={`rounded-full bg-[rgb(var(--bg-secondary))] px-3 py-1 text-sm text-[rgb(var(--text-primary))] transition-all ${
+                          url ? 'hover:bg-[rgb(var(--accent))]/10 hover:text-[rgb(var(--accent))] hover:scale-105 cursor-pointer' : ''
+                        }`}
+                      >
+                        {skill}
+                      </Tag>
+                    );
+                  })}
                 </div>
               </div>
                <div>
                 <h4 className="text-sm font-medium text-[rgb(var(--text-secondary))] uppercase tracking-wider mb-2">Databases</h4>
                 <div className="flex flex-wrap gap-2">
-                  {["PostgreSQL", "MSSQL", "DynamoDB", "MongoDB"].map(skill => (
-                    <span key={skill} className="rounded-full bg-[rgb(var(--bg-secondary))] px-3 py-1 text-sm text-[rgb(var(--text-primary))]">
-                      {skill}
-                    </span>
-                  ))}
+                  {["PostgreSQL", "MSSQL", "DynamoDB", "MongoDB"].map(skill => {
+                    const url = SKILL_URLS[skill];
+                    const Tag = url ? 'a' : 'span';
+                    return (
+                      <Tag 
+                        key={skill} 
+                        href={url}
+                        target={url ? "_blank" : undefined}
+                        rel={url ? "noopener noreferrer" : undefined}
+                        className={`rounded-full bg-[rgb(var(--bg-secondary))] px-3 py-1 text-sm text-[rgb(var(--text-primary))] transition-all ${
+                          url ? 'hover:bg-[rgb(var(--accent))]/10 hover:text-[rgb(var(--accent))] hover:scale-105 cursor-pointer' : ''
+                        }`}
+                      >
+                        {skill}
+                      </Tag>
+                    );
+                  })}
                 </div>
               </div>
             </div>
