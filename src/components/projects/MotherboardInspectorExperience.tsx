@@ -227,6 +227,86 @@ export default function MotherboardInspectorExperience() {
           </div>
         </div>
       </div>
+
+      <MotherboardArchitecture />
     </div>
+  );
+}
+
+function MotherboardArchitecture() {
+  const [hoveredStep, setHoveredStep] = useState<string | null>(null);
+
+  const steps = [
+    { id: 'input', label: 'Input Feed', icon: Eye, color: 'text-blue-400', bg: 'bg-blue-400/10', desc: '1080p Camera Stream' },
+    { id: 'preprocess', label: 'Preprocessing', icon: Scan, color: 'text-purple-400', bg: 'bg-purple-400/10', desc: 'Grayscale & Thresholding' },
+    { id: 'detection', label: 'Detection', icon: CheckCircle2, color: 'text-yellow-400', bg: 'bg-yellow-400/10', desc: 'Contour Analysis (ROI)' },
+    { id: 'ocr', label: 'Recognition', icon: Terminal, color: 'text-green-400', bg: 'bg-green-400/10', desc: 'Tesseract OCR' },
+    { id: 'validation', label: 'Validation', icon: CheckCircle2, color: 'text-pink-400', bg: 'bg-pink-400/10', desc: 'Regex & DB Check' },
+  ];
+
+  return (
+    <section>
+      <h3 className="font-display text-2xl font-bold text-[rgb(var(--text-primary))] mb-8">
+        System Architecture
+      </h3>
+      
+      <div className="relative rounded-3xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/30 p-8 md:p-12 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.02] [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]" />
+        
+        <div className="relative z-10 grid gap-8 md:grid-cols-5">
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+            const isHovered = hoveredStep === step.id;
+
+            return (
+              <div key={step.id} className="relative flex flex-col items-center">
+                {/* Connector Line */}
+                {index < steps.length - 1 && (
+                  <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-[rgb(var(--border))] -z-10">
+                    <motion.div 
+                      initial={{ width: "0%" }}
+                      whileInView={{ width: "100%" }}
+                      transition={{ duration: 1, delay: index * 0.2 }}
+                      className="h-full bg-[rgb(var(--accent))]"
+                    />
+                  </div>
+                )}
+
+                <motion.div
+                  onHoverStart={() => setHoveredStep(step.id)}
+                  onHoverEnd={() => setHoveredStep(null)}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className={`relative z-10 flex flex-col items-center gap-4 rounded-xl border p-4 text-center transition-all duration-300 cursor-default ${
+                    isHovered 
+                      ? 'bg-[rgb(var(--bg-secondary))] shadow-xl ring-1 ring-[rgb(var(--accent))]/50 border-[rgb(var(--accent))]' 
+                      : 'bg-[rgb(var(--bg-primary))] border-[rgb(var(--border))]'
+                  }`}
+                >
+                  <div className={`rounded-full p-3 ${step.bg} ${step.color} ring-1 ring-inset ring-white/10`}>
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-[rgb(var(--text-primary))] text-sm mb-1">
+                      {step.label}
+                    </div>
+                    <div className="text-xs text-[rgb(var(--text-secondary))]">
+                      {step.desc}
+                    </div>
+                  </div>
+                  
+                  {/* Hover Indicator */}
+                  {isHovered && (
+                    <motion.div
+                      layoutId="arch-indicator"
+                      className="absolute -bottom-2 h-1 w-8 rounded-full bg-[rgb(var(--accent))]"
+                    />
+                  )}
+                </motion.div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
