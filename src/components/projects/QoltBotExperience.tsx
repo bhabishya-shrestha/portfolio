@@ -367,7 +367,7 @@ function ArchitectureDiagram() {
   );
 }
 
-function DiagramNode({ icon: Icon, label, isActive }: { icon: any, label: string, isActive: boolean }) {
+function DiagramNode({ icon: Icon, label, isActive }: { icon: React.ElementType, label: string, isActive: boolean, id?: string }) {
   return (
     <motion.div
       animate={{
