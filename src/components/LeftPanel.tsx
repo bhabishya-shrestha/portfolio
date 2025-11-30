@@ -52,7 +52,7 @@ export default function LeftPanel() {
     { name: "Experience", id: "experience" },
     { name: "Projects", id: "projects" },
     { name: "Skills", id: "skills" },
-    { name: "Engineering Notes", id: "notes" },
+    { name: "Notes & Interests", id: "notes" },
   ];
 
   return (
