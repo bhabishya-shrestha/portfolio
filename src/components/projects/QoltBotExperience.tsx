@@ -5,13 +5,16 @@ import {
   Brain,
   MessageSquare,
   Search,
-  FileText,
   Server,
   Cpu,
   Cloud,
   CheckCircle2,
   Play,
+  Mic,
+  Zap,
+  HardDrive,
 } from "lucide-react";
+import { ArchitectureNode } from "./ArchitectureNode";
 
 const PIPELINE_STEPS = [
   {
@@ -79,11 +82,13 @@ export default function QoltBotExperience() {
   };
 
   useEffect(() => {
-    if (!isSimulating || activeStep >= PIPELINE_STEPS.length) {
-      if (activeStep >= PIPELINE_STEPS.length) {
-        setTimeout(() => setIsSimulating(false), 3000);
-      }
-      return;
+    if (!isSimulating) return;
+
+    if (activeStep >= PIPELINE_STEPS.length - 1) {
+      const timer = setTimeout(() => {
+        setIsSimulating(false);
+      }, 1000);
+      return () => clearTimeout(timer);
     }
 
     const timer = setTimeout(() => {
@@ -92,6 +97,13 @@ export default function QoltBotExperience() {
 
     return () => clearTimeout(timer);
   }, [activeStep, isSimulating]);
+
+  const handleStepClick = (index: number) => {
+    // Allow manual navigation when not simulating or after simulation completes
+    if (!isSimulating) {
+      setActiveStep(index);
+    }
+  };
 
   return (
     <div className="w-full space-y-16 py-8">
@@ -164,6 +176,8 @@ export default function QoltBotExperience() {
                   )}
 
                   <motion.div
+                    onClick={() => handleStepClick(index)}
+                    whileHover={{ scale: !isSimulating ? 1.02 : 1 }}
                     animate={{
                       scale: isActive ? 1.05 : 1,
                       opacity:
@@ -173,11 +187,11 @@ export default function QoltBotExperience() {
                           ? "rgba(var(--accent), 0.5)"
                           : "rgba(var(--border), 1)",
                     }}
-                    className={`relative z-10 flex flex-col items-center gap-4 rounded-xl border p-4 text-center transition-colors duration-300 ${
+                    className={`relative z-10 flex flex-col items-center gap-4 rounded-xl border p-4 text-center transition-all duration-300 ${
                       isActive
                         ? "bg-[rgb(var(--bg-secondary))] shadow-xl ring-1 ring-[rgb(var(--accent))]/50"
                         : "bg-[rgb(var(--bg-primary))]"
-                    }`}
+                    } ${!isSimulating ? "cursor-pointer hover:bg-[rgb(var(--bg-secondary))]/50" : ""}`}
                   >
                     <div
                       className={`rounded-full p-3 ${step.bg} ${step.color} ring-1 ring-inset ${step.border}`}
@@ -210,6 +224,13 @@ export default function QoltBotExperience() {
               );
             })}
           </div>
+
+          {/* Helper Text */}
+          {!isSimulating && activeStep !== -1 && (
+            <p className="text-center text-sm text-[rgb(var(--text-secondary))]/80 mt-4">
+              Click on any step to view its details
+            </p>
+          )}
 
           {/* Dynamic Content Display */}
           <div className="mt-8 min-h-[120px] rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-primary))] p-6 relative overflow-hidden">
@@ -333,187 +354,485 @@ export default function QoltBotExperience() {
 
 function ArchitectureDiagram() {
   const [hoveredComponent, setHoveredComponent] = useState<string | null>(null);
+  const [selectedFlow, setSelectedFlow] = useState<string | null>(null);
+
+  const flows = [
+    {
+      id: "chat",
+      label: "Chat Flow",
+      path: ["frontend", "gateway", "lambda", "chroma", "openai"],
+    },
+    {
+      id: "voice",
+      label: "Voice Flow",
+      path: ["frontend", "gateway", "lambda", "s3", "transcribe", "eventbridge", "sns"],
+    },
+    {
+      id: "upload",
+      label: "Upload Flow",
+      path: ["frontend", "gateway", "lambda", "s3"],
+    },
+  ];
 
   const components = [
     {
       id: "frontend",
-      title: "Frontend",
-      desc: "React + Vite hosted on Netlify",
+      title: "React Frontend",
+      desc: "Netlify hosted SPA",
       icon: Cloud,
+      category: "client",
+      url: "https://react.dev",
     },
     {
       id: "gateway",
       title: "API Gateway",
-      desc: "AWS API Gateway for WebSocket & REST",
+      desc: "WebSocket & REST APIs",
       icon: Server,
+      category: "aws",
+      url: "https://aws.amazon.com/api-gateway/",
     },
     {
       id: "lambda",
-      title: "Compute",
-      desc: "AWS Lambda (Serverless Python)",
+      title: "Lambda Functions",
+      desc: "Docker containers (FastAPI)",
       icon: Cpu,
+      category: "aws",
+      url: "https://aws.amazon.com/lambda/",
     },
     {
       id: "chroma",
-      title: "Vector DB",
-      desc: "ChromaDB running in Docker",
+      title: "ChromaDB",
+      desc: "Vector embeddings storage",
       icon: Database,
+      category: "database",
+      url: "https://docs.trychroma.com",
+    },
+    {
+      id: "openai",
+      title: "OpenAI API",
+      desc: "GPT-3.5 Turbo",
+      icon: Brain,
+      category: "external",
+      url: "https://platform.openai.com/docs/introduction",
     },
     {
       id: "s3",
-      title: "Storage",
-      desc: "AWS S3 for documents & audio",
-      icon: FileText,
+      title: "S3 Storage",
+      desc: "Documents & audio files",
+      icon: HardDrive,
+      category: "aws",
+      url: "https://aws.amazon.com/s3/",
+    },
+    {
+      id: "transcribe",
+      title: "AWS Transcribe",
+      desc: "Speech-to-text",
+      icon: Mic,
+      category: "aws",
+      url: "https://aws.amazon.com/transcribe/",
+    },
+    {
+      id: "eventbridge",
+      title: "EventBridge",
+      desc: "Event orchestration",
+      icon: Zap,
+      category: "aws",
+      url: "https://aws.amazon.com/eventbridge/",
+    },
+    {
+      id: "sns",
+      title: "SNS",
+      desc: "Notification service",
+      icon: MessageSquare,
+      category: "aws",
+      url: "https://aws.amazon.com/sns/",
+    },
+    {
+      id: "rds",
+      title: "RDS PostgreSQL",
+      desc: "User authentication DB",
+      icon: Database,
+      category: "database",
+      url: "https://aws.amazon.com/rds/postgresql/",
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div className="space-y-4">
-        {components.map((item) => (
-          <motion.div
-            key={item.id}
-            onHoverStart={() => setHoveredComponent(item.id)}
-            onHoverEnd={() => setHoveredComponent(null)}
-            whileHover={{
-              x: 10,
-              backgroundColor: "rgba(var(--bg-secondary), 0.5)",
-            }}
-            className={`flex items-center gap-4 rounded-xl border p-4 transition-colors cursor-default ${
-              hoveredComponent === item.id
-                ? "border-[rgb(var(--accent))] bg-[rgb(var(--bg-secondary))]/50"
-                : "border-[rgb(var(--border))]"
-            }`}
-          >
-            <div
-              className={`rounded-lg p-2 transition-colors ${
-                hoveredComponent === item.id
-                  ? "bg-[rgb(var(--accent))]/20 text-[rgb(var(--accent))]"
-                  : "bg-[rgb(var(--bg-secondary))] text-[rgb(var(--text-secondary))]"
+    <div className="space-y-8">
+      {/* Flow Selector */}
+      {/* Interactive Architecture Diagram */}
+      <div className="rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/20 p-4 md:p-8">
+        {/* Flow Selector - Sticky on Mobile */}
+        <div className="sticky top-0 z-20 bg-[rgb(var(--bg-secondary))] md:bg-transparent -mx-4 px-4 py-4 md:p-0 md:static border-b md:border-0 border-[rgb(var(--border))] mb-6 md:mb-8 backdrop-blur-md md:backdrop-blur-none bg-opacity-90 md:bg-opacity-100">
+          <div className="flex flex-wrap gap-2 justify-center">
+            <button
+              onClick={() => setSelectedFlow(null)}
+              className={`px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-all ${
+                selectedFlow === null
+                  ? "bg-[rgb(var(--accent))] text-white shadow-lg shadow-[rgb(var(--accent))]/20"
+                  : "bg-[rgb(var(--bg-primary))] md:bg-[rgb(var(--bg-secondary))] text-[rgb(var(--text-secondary))] hover:bg-[rgb(var(--bg-secondary))]/80 border border-[rgb(var(--border))]"
               }`}
             >
-              <item.icon className="h-6 w-6" />
-            </div>
-            <div>
-              <h4
-                className={`font-bold transition-colors ${hoveredComponent === item.id ? "text-[rgb(var(--accent))]" : "text-[rgb(var(--text-primary))]"}`}
+              All
+            </button>
+            {flows.map((flow) => (
+              <button
+                key={flow.id}
+                onClick={() => setSelectedFlow(flow.id)}
+                className={`px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-all ${
+                  selectedFlow === flow.id
+                    ? "bg-[rgb(var(--accent))] text-white shadow-lg shadow-[rgb(var(--accent))]/20"
+                    : "bg-[rgb(var(--bg-primary))] md:bg-[rgb(var(--bg-secondary))] text-[rgb(var(--text-secondary))] hover:bg-[rgb(var(--bg-secondary))]/80 border border-[rgb(var(--border))]"
+                }`}
               >
-                {item.title}
+                {flow.label}
+              </button>
+            ))}
+          </div>
+          {/* Mobile Helper Text */}
+          <p className="md:hidden text-[10px] text-center text-[rgb(var(--text-secondary))] mt-2 opacity-80">
+            Select a flow to highlight components
+          </p>
+        </div>
+
+        {/* Desktop View - Full Layered Diagram */}
+        <div className="hidden md:block overflow-x-auto">
+          <div className="min-w-[800px]">
+            {/* Client Layer */}
+            <div className="mb-8">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] mb-4">
+                Client Layer
               </h4>
-              <p className="text-sm text-[rgb(var(--text-secondary))]">
-                {item.desc}
-              </p>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Interactive Diagram */}
-      <div className="relative rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/20 p-8 flex items-center justify-center min-h-[400px] overflow-hidden">
-        {/* Background Grid */}
-        <div className="absolute inset-0 bg-grid-white/[0.02]" />
-
-        {/* Diagram Nodes */}
-        <div className="relative z-10 w-full h-full flex flex-col items-center justify-center gap-8">
-          {/* Frontend Node */}
-          <DiagramNode
-            id="frontend"
-            icon={Cloud}
-            label="Frontend"
-            isActive={hoveredComponent === "frontend"}
-          />
-
-          <div className="h-8 w-0.5 bg-[rgb(var(--border))]" />
-
-          {/* Gateway Node */}
-          <DiagramNode
-            id="gateway"
-            icon={Server}
-            label="API Gateway"
-            isActive={hoveredComponent === "gateway"}
-          />
-
-          <div className="h-8 w-0.5 bg-[rgb(var(--border))]" />
-
-          {/* Lambda Node */}
-          <DiagramNode
-            id="lambda"
-            icon={Cpu}
-            label="AWS Lambda"
-            isActive={hoveredComponent === "lambda"}
-          />
-
-          <div className="grid grid-cols-2 gap-16 w-full max-w-xs relative">
-            {/* Connecting Lines */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 w-full h-4 border-t-2 border-x-2 border-[rgb(var(--border))] rounded-t-xl" />
-
-            {/* Chroma Node */}
-            <div className="flex flex-col items-center gap-2 pt-4">
-              <DiagramNode
-                id="chroma"
-                icon={Database}
-                label="ChromaDB"
-                isActive={hoveredComponent === "chroma"}
-              />
+              <div className="flex justify-center">
+                <ArchitectureNode
+                  component={components.find((c) => c.id === "frontend")!}
+                  isHighlighted={
+                    hoveredComponent === "frontend" ||
+                    Boolean(selectedFlow !== null &&
+                      flows
+                        .find((f) => f.id === selectedFlow)
+                        ?.path.includes("frontend"))
+                  }
+                  onHover={setHoveredComponent}
+                />
+              </div>
             </div>
 
-            {/* S3 Node */}
-            <div className="flex flex-col items-center gap-2 pt-4">
-              <DiagramNode
-                id="s3"
-                icon={FileText}
-                label="S3 Storage"
-                isActive={hoveredComponent === "s3"}
-              />
+            {/* Connection Line */}
+            <div className="flex justify-center mb-8">
+              <div className="h-12 w-0.5 bg-[rgb(var(--border))]" />
+            </div>
+
+            {/* AWS Gateway Layer */}
+            <div className="mb-8">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] mb-4">
+                API Layer
+              </h4>
+              <div className="flex justify-center">
+                <ArchitectureNode
+                  component={components.find((c) => c.id === "gateway")!}
+                  isHighlighted={
+                    hoveredComponent === "gateway" ||
+                    Boolean(selectedFlow !== null &&
+                      flows
+                        .find((f) => f.id === selectedFlow)
+                        ?.path.includes("gateway"))
+                  }
+                  onHover={setHoveredComponent}
+                />
+              </div>
+            </div>
+
+            {/* Connection Line */}
+            <div className="flex justify-center mb-8">
+              <div className="h-12 w-0.5 bg-[rgb(var(--border))]" />
+            </div>
+
+            {/* Compute Layer */}
+            <div className="mb-8">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] mb-4">
+                Compute Layer
+              </h4>
+              <div className="flex justify-center">
+                <ArchitectureNode
+                  component={components.find((c) => c.id === "lambda")!}
+                  isHighlighted={
+                    hoveredComponent === "lambda" ||
+                    Boolean(selectedFlow !== null &&
+                      flows
+                        .find((f) => f.id === selectedFlow)
+                        ?.path.includes("lambda"))
+                  }
+                  onHover={setHoveredComponent}
+                />
+              </div>
+            </div>
+
+            {/* Connection Lines to Services */}
+            <div className="relative h-16 mb-8">
+              <svg className="absolute inset-0 w-full h-full" style={{ overflow: "visible" }}>
+                {/* Main trunk */}
+                <line
+                  x1="50%"
+                  y1="0"
+                  x2="50%"
+                  y2="50%"
+                  stroke="rgb(var(--border))"
+                  strokeWidth="1"
+                />
+                {/* Branches */}
+                <line
+                  x1="50%"
+                  y1="50%"
+                  x2="16.66%"
+                  y2="100%"
+                  stroke="rgb(var(--border))"
+                  strokeWidth="1"
+                />
+                <line
+                  x1="50%"
+                  y1="50%"
+                  x2="33.33%"
+                  y2="100%"
+                  stroke="rgb(var(--border))"
+                  strokeWidth="1"
+                />
+                <line
+                  x1="50%"
+                  y1="50%"
+                  x2="50%"
+                  y2="100%"
+                  stroke="rgb(var(--border))"
+                  strokeWidth="1"
+                />
+                <line
+                  x1="50%"
+                  y1="50%"
+                  x2="66.66%"
+                  y2="100%"
+                  stroke="rgb(var(--border))"
+                  strokeWidth="1"
+                />
+                <line
+                  x1="50%"
+                  y1="50%"
+                  x2="83.33%"
+                  y2="100%"
+                  stroke="rgb(var(--border))"
+                  strokeWidth="1"
+                />
+              </svg>
+            </div>
+
+            {/* Services Layer */}
+            <div className="mb-8">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] mb-4">
+                Services & Data Layer
+              </h4>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                {["chroma", "openai", "s3", "rds", "transcribe"].map((id) => {
+                  const component = components.find((c) => c.id === id)!;
+                  return (
+                    <ArchitectureNode
+                      key={id}
+                      component={component}
+                      isHighlighted={
+                        hoveredComponent === id ||
+                        Boolean(selectedFlow !== null &&
+                          flows
+                            .find((f) => f.id === selectedFlow)
+                            ?.path.includes(id))
+                      }
+                      onHover={setHoveredComponent}
+                      compact
+                    />
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Event Processing Layer */}
+            <div className="mt-8 pt-8 border-t border-[rgb(var(--border))]">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] mb-4">
+                Event Processing (Voice Flow)
+              </h4>
+              <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+                {["eventbridge", "sns"].map((id) => {
+                  const component = components.find((c) => c.id === id)!;
+                  return (
+                    <ArchitectureNode
+                      key={id}
+                      component={component}
+                      isHighlighted={
+                        hoveredComponent === id ||
+                        Boolean(selectedFlow !== null &&
+                          flows
+                            .find((f) => f.id === selectedFlow)
+                            ?.path.includes(id))
+                      }
+                      onHover={setHoveredComponent}
+                      compact
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Helper Text */}
-        <div className="absolute bottom-4 left-0 right-0 text-center">
-          <p className="text-xs text-[rgb(var(--text-secondary))]/60">
-            Hover over components list to highlight architecture
-          </p>
+        {/* Mobile View - Layered List */}
+        <div className="md:hidden space-y-8">
+          {/* Client Layer */}
+          <div className="space-y-3">
+            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] border-b border-[rgb(var(--border))] pb-2">
+              Client Layer
+            </h4>
+            <ArchitectureNode
+              component={components.find((c) => c.id === "frontend")!}
+              isHighlighted={
+                hoveredComponent === "frontend" ||
+                Boolean(selectedFlow !== null &&
+                  flows
+                    .find((f) => f.id === selectedFlow)
+                    ?.path.includes("frontend"))
+              }
+              onHover={setHoveredComponent}
+              compact={false}
+            />
+          </div>
+
+          {/* API Layer */}
+          <div className="space-y-3">
+            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] border-b border-[rgb(var(--border))] pb-2">
+              API Layer
+            </h4>
+            <ArchitectureNode
+              component={components.find((c) => c.id === "gateway")!}
+              isHighlighted={
+                hoveredComponent === "gateway" ||
+                Boolean(selectedFlow !== null &&
+                  flows
+                    .find((f) => f.id === selectedFlow)
+                    ?.path.includes("gateway"))
+              }
+              onHover={setHoveredComponent}
+              compact={false}
+            />
+          </div>
+
+          {/* Compute Layer */}
+          <div className="space-y-3">
+            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] border-b border-[rgb(var(--border))] pb-2">
+              Compute Layer
+            </h4>
+            <ArchitectureNode
+              component={components.find((c) => c.id === "lambda")!}
+              isHighlighted={
+                hoveredComponent === "lambda" ||
+                Boolean(selectedFlow !== null &&
+                  flows
+                    .find((f) => f.id === selectedFlow)
+                    ?.path.includes("lambda"))
+              }
+              onHover={setHoveredComponent}
+              compact={false}
+            />
+          </div>
+
+          {/* Services Layer */}
+          <div className="space-y-3">
+            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] border-b border-[rgb(var(--border))] pb-2">
+              Services & Data
+            </h4>
+            <div className="grid grid-cols-1 gap-3">
+              {["chroma", "openai", "s3", "rds", "transcribe"].map((id) => {
+                const component = components.find((c) => c.id === id)!;
+                const isHighlighted = hoveredComponent === id ||
+                  Boolean(selectedFlow !== null &&
+                    flows
+                      .find((f) => f.id === selectedFlow)
+                      ?.path.includes(id));
+                
+                // Only show relevant services when a flow is selected to reduce clutter
+                if (selectedFlow && !isHighlighted) return null;
+
+                return (
+                  <ArchitectureNode
+                    key={id}
+                    component={component}
+                    isHighlighted={isHighlighted}
+                    onHover={setHoveredComponent}
+                    compact={false}
+                  />
+                );
+              })}
+              {/* Show placeholder if all items are hidden */}
+              {selectedFlow && !["chroma", "openai", "s3", "rds", "transcribe"].some(id => 
+                flows.find(f => f.id === selectedFlow)?.path.includes(id)
+              ) && (
+                <div className="text-center py-4 text-xs text-[rgb(var(--text-secondary))] italic">
+                  No services involved in this flow
+                </div>
+              )}
+              {/* Show all if no flow selected - Logic handled by the block below */}
+              {!selectedFlow && null}
+            </div>
+            {/* Re-render for 'All' case to avoid complex logic above */}
+
+          </div>
+
+          {/* Event Processing Layer */}
+          <div className="space-y-3">
+            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] border-b border-[rgb(var(--border))] pb-2">
+              Event Processing
+            </h4>
+            <div className="grid grid-cols-1 gap-3">
+              {["eventbridge", "sns"].map((id) => {
+                const component = components.find((c) => c.id === id)!;
+                const isHighlighted = hoveredComponent === id ||
+                  Boolean(selectedFlow !== null &&
+                    flows
+                      .find((f) => f.id === selectedFlow)
+                      ?.path.includes(id));
+                
+                if (selectedFlow && !isHighlighted) return null;
+
+                return (
+                  <ArchitectureNode
+                    key={id}
+                    component={component}
+                    isHighlighted={isHighlighted}
+                    onHover={setHoveredComponent}
+                    compact={false}
+                  />
+                );
+              })}
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Legend */}
+      <div className="flex flex-wrap gap-4 text-sm">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-blue-500/20 border border-blue-500/50" />
+          <span className="text-[rgb(var(--text-secondary))]">Client</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-orange-500/20 border border-orange-500/50" />
+          <span className="text-[rgb(var(--text-secondary))]">AWS Services</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
+          <span className="text-[rgb(var(--text-secondary))]">Databases</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-purple-500/20 border border-purple-500/50" />
+          <span className="text-[rgb(var(--text-secondary))]">External APIs</span>
         </div>
       </div>
     </div>
   );
 }
 
-function DiagramNode({
-  icon: Icon,
-  label,
-  isActive,
-}: {
-  icon: React.ElementType;
-  label: string;
-  isActive: boolean;
-  id?: string;
-}) {
-  return (
-    <motion.div
-      animate={{
-        scale: isActive ? 1.1 : 1,
-        borderColor: isActive
-          ? "rgba(var(--accent), 1)"
-          : "rgba(var(--border), 1)",
-        backgroundColor: isActive
-          ? "rgba(var(--bg-primary), 1)"
-          : "rgba(var(--bg-secondary), 0.5)",
-        boxShadow: isActive ? "0 0 20px rgba(var(--accent), 0.2)" : "none",
-      }}
-      className="flex flex-col items-center gap-2 rounded-xl border p-4 min-w-[120px] transition-colors"
-    >
-      <div
-        className={`rounded-full p-2 ${isActive ? "text-[rgb(var(--accent))] bg-[rgb(var(--accent))]/10" : "text-[rgb(var(--text-secondary))]"}`}
-      >
-        <Icon className="h-6 w-6" />
-      </div>
-      <span
-        className={`text-sm font-bold ${isActive ? "text-[rgb(var(--accent))]" : "text-[rgb(var(--text-primary))]"}`}
-      >
-        {label}
-      </span>
-    </motion.div>
-  );
-}

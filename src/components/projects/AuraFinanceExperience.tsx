@@ -1,19 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Database,
-  CheckCircle2,
+  Cloud,
+  Layout,
+  HardDrive,
+  BarChart3,
+  Zap,
   Wallet,
   TrendingUp,
   DollarSign,
   Sun,
   Moon,
-  Wifi,
-  WifiOff,
-  Smartphone,
-  Cloud,
-  RefreshCw,
 } from "lucide-react";
+import { ArchitectureNode } from "./ArchitectureNode";
 
 // Mock Data for Dashboard
 const CHART_DATA = [
@@ -98,7 +97,8 @@ export default function AuraFinanceExperience() {
   return (
     <div className="w-full space-y-16 py-8">
       <DashboardSimulation />
-      <SyncArchitectureVisualization />
+
+      <ArchitectureDiagram />
     </div>
   );
 }
@@ -363,193 +363,366 @@ function DashboardSimulation() {
   );
 }
 
-function SyncArchitectureVisualization() {
-  const [isOffline, setIsOffline] = useState(false);
-  const [syncStatus, setSyncStatus] = useState<
-    "idle" | "syncing" | "synced" | "queued"
-  >("idle");
-  const [localData, setLocalData] = useState<number[]>([]);
-  const [cloudData, setCloudData] = useState<number[]>([]);
 
-  // Simulate user action
-  const addData = () => {
-    const newData = Date.now();
-    setLocalData((prev) => [...prev, newData]);
 
-    if (isOffline) {
-      setSyncStatus("queued");
-    } else {
-      setSyncStatus("syncing");
-      setTimeout(() => {
-        setCloudData((prev) => [...prev, newData]);
-        setSyncStatus("synced");
-        setTimeout(() => setSyncStatus("idle"), 1000);
-      }, 1500);
-    }
-  };
+function ArchitectureDiagram() {
+  const [selectedFlow, setSelectedFlow] = useState<string | null>(null);
+  const [hoveredComponent, setHoveredComponent] = useState<string | null>(null);
 
-  // Handle coming back online
-  useEffect(() => {
-    if (!isOffline && localData.length > cloudData.length) {
-      // Use setTimeout to avoid synchronous state update warning
-      const syncTimer = setTimeout(() => {
-        setSyncStatus("syncing");
-        const completeTimer = setTimeout(() => {
-          setCloudData(localData);
-          setSyncStatus("synced");
-          setTimeout(() => setSyncStatus("idle"), 1000);
-        }, 1500);
-        return () => clearTimeout(completeTimer);
-      }, 0);
+  const flows = [
+    {
+      id: "offline",
+      label: "Offline Transaction",
+      path: ["frontend", "zustand", "dexie"],
+      description: "Instant local updates via IndexedDB",
+    },
+    {
+      id: "sync",
+      label: "Cloud Sync",
+      path: ["dexie", "firebase"],
+      description: "Background synchronization when online",
+    },
+    {
+      id: "analytics",
+      label: "Analytics View",
+      path: ["dexie", "recharts", "frontend"],
+      description: "Real-time visualization of local data",
+    },
+  ];
 
-      return () => clearTimeout(syncTimer);
-    }
-  }, [isOffline, localData, cloudData]);
+  const components = [
+    {
+      id: "frontend",
+      title: "React Frontend",
+      desc: "Vite + Tailwind CSS",
+      icon: Layout,
+      category: "client",
+      url: "https://react.dev",
+    },
+    {
+      id: "zustand",
+      title: "Zustand Store",
+      desc: "State Management",
+      icon: Zap,
+      category: "client",
+      url: "https://zustand-demo.pmnd.rs",
+    },
+    {
+      id: "dexie",
+      title: "Dexie.js",
+      desc: "IndexedDB Wrapper",
+      icon: HardDrive,
+      category: "database",
+      url: "https://dexie.org",
+    },
+    {
+      id: "firebase",
+      title: "Firebase",
+      desc: "Auth & Firestore",
+      icon: Cloud,
+      category: "service",
+      url: "https://firebase.google.com",
+    },
+    {
+      id: "recharts",
+      title: "Recharts",
+      desc: "Data Visualization",
+      icon: BarChart3,
+      category: "client",
+      url: "https://recharts.org",
+    },
+  ];
 
   return (
-    <section>
-      <div className="mb-8 flex items-center justify-between">
+    <section className="space-y-8">
+      <div className="flex items-center justify-between">
         <div>
           <h3 className="font-display text-2xl font-bold text-[rgb(var(--text-primary))]">
-            Local-First Architecture
+            System Architecture
           </h3>
           <p className="text-[rgb(var(--text-secondary))] mt-2 max-w-xl">
-            Aura uses <strong>Dexie.js (IndexedDB)</strong> for instant,
-            offline-capable local storage, and syncs to{" "}
-            <strong>Firebase</strong> in the background when online.
+            Explore the local-first architecture that powers Aura Finance.
           </p>
         </div>
-        <button
-          onClick={() => setIsOffline(!isOffline)}
-          className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-colors ${
-            isOffline
-              ? "bg-red-500/10 text-red-500 border border-red-500/20"
-              : "bg-green-500/10 text-green-500 border border-green-500/20"
-          }`}
-        >
-          {isOffline ? (
-            <WifiOff className="h-4 w-4" />
-          ) : (
-            <Wifi className="h-4 w-4" />
-          )}
-          {isOffline ? "Offline Mode" : "Online Mode"}
-        </button>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-[1fr_auto_1fr] items-center">
-        {/* Local Device */}
-        <div className="relative rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/30 p-6 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-500">
-            <Smartphone className="h-8 w-8" />
-          </div>
-          <h4 className="font-bold text-[rgb(var(--text-primary))]">
-            Local Device
-          </h4>
-          <p className="text-xs text-[rgb(var(--text-secondary))] mb-4">
-            IndexedDB (Dexie.js)
-          </p>
-
-          <div className="space-y-2">
-            <button
-              onClick={addData}
-              className="w-full rounded-lg bg-blue-500 py-2 text-sm font-bold text-white hover:bg-blue-600 active:scale-95 transition-all"
-            >
-              Add Transaction
-            </button>
-            <div className="h-32 overflow-y-auto rounded-lg border border-[rgb(var(--border))] bg-[rgb(var(--bg-primary))] p-2 text-left">
-              <AnimatePresence mode="popLayout">
-                {localData.map((id) => (
-                  <motion.div
-                    key={id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    layout
-                    className="mb-1 flex items-center gap-2 rounded px-2 py-1 text-xs font-medium bg-blue-500/10 text-blue-500"
-                  >
-                    <CheckCircle2 className="h-3 w-3" />
-                    <span>Data Saved</span>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-              {localData.length === 0 && (
-                <p className="text-center text-xs text-[rgb(var(--text-secondary))] py-4">
-                  No data yet
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Sync Status */}
-        <div className="flex flex-col items-center justify-center gap-2 text-[rgb(var(--text-secondary))]">
-          {syncStatus === "syncing" && (
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-            >
-              <RefreshCw className="h-8 w-8 text-blue-500" />
-            </motion.div>
-          )}
-          {syncStatus === "queued" && (
-            <div className="flex flex-col items-center gap-1 text-orange-500">
-              <Database className="h-8 w-8" />
-              <span className="text-xs font-bold">Queued</span>
-            </div>
-          )}
-          {syncStatus === "synced" && (
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              className="text-green-500"
-            >
-              <CheckCircle2 className="h-8 w-8" />
-            </motion.div>
-          )}
-          {syncStatus === "idle" && (
-            <div className="h-8 w-8 rounded-full bg-[rgb(var(--border))]" />
-          )}
-
-          {/* Connection Line */}
-          <div
-            className={`h-1 w-24 rounded-full transition-colors ${
-              isOffline ? "bg-red-500/20" : "bg-green-500/20"
+      <div className="flex flex-wrap gap-2 justify-center mb-8">
+        <button
+          onClick={() => setSelectedFlow(null)}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+            selectedFlow === null
+              ? "bg-[rgb(var(--accent))] text-white"
+              : "bg-[rgb(var(--bg-secondary))] text-[rgb(var(--text-secondary))] hover:bg-[rgb(var(--bg-secondary))]/80"
+          }`}
+        >
+          All Components
+        </button>
+        {flows.map((flow) => (
+          <button
+            key={flow.id}
+            onClick={() => setSelectedFlow(flow.id)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              selectedFlow === flow.id
+                ? "bg-[rgb(var(--accent))] text-white"
+                : "bg-[rgb(var(--bg-secondary))] text-[rgb(var(--text-secondary))] hover:bg-[rgb(var(--bg-secondary))]/80"
             }`}
-          />
+          >
+            {flow.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Interactive Architecture Diagram */}
+      <div className="rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/20 p-4 md:p-8">
+        {/* Flow Selector - Sticky on Mobile */}
+        <div className="sticky top-0 z-20 bg-[rgb(var(--bg-secondary))] md:bg-transparent -mx-4 px-4 py-4 md:p-0 md:static border-b md:border-0 border-[rgb(var(--border))] mb-6 md:mb-8 backdrop-blur-md md:backdrop-blur-none bg-opacity-90 md:bg-opacity-100">
+          <div className="flex flex-wrap gap-2 justify-center">
+            <button
+              onClick={() => setSelectedFlow(null)}
+              className={`px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-all ${
+                selectedFlow === null
+                  ? "bg-[rgb(var(--accent))] text-white shadow-lg shadow-[rgb(var(--accent))]/20"
+                  : "bg-[rgb(var(--bg-primary))] md:bg-[rgb(var(--bg-secondary))] text-[rgb(var(--text-secondary))] hover:bg-[rgb(var(--bg-secondary))]/80 border border-[rgb(var(--border))]"
+              }`}
+            >
+              All
+            </button>
+            {flows.map((flow) => (
+              <button
+                key={flow.id}
+                onClick={() => setSelectedFlow(flow.id)}
+                className={`px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-all ${
+                  selectedFlow === flow.id
+                    ? "bg-[rgb(var(--accent))] text-white shadow-lg shadow-[rgb(var(--accent))]/20"
+                    : "bg-[rgb(var(--bg-primary))] md:bg-[rgb(var(--bg-secondary))] text-[rgb(var(--text-secondary))] hover:bg-[rgb(var(--bg-secondary))]/80 border border-[rgb(var(--border))]"
+                }`}
+              >
+                {flow.label}
+              </button>
+            ))}
+          </div>
+          {/* Mobile Helper Text */}
+          <p className="md:hidden text-[10px] text-center text-[rgb(var(--text-secondary))] mt-2 opacity-80">
+            Select a flow to highlight components
+          </p>
         </div>
 
-        {/* Cloud */}
-        <div className="relative rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/30 p-6 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-500">
-            <Cloud className="h-8 w-8" />
-          </div>
-          <h4 className="font-bold text-[rgb(var(--text-primary))]">
-            Cloud Backend
-          </h4>
-          <p className="text-xs text-[rgb(var(--text-secondary))] mb-4">
-            Firebase / Firestore
-          </p>
+        {/* Desktop View - Full Layered Diagram */}
+        <div className="hidden md:block overflow-x-auto">
+          <div className="min-w-[800px]">
+            {/* Client Layer */}
+            <div className="mb-8">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] mb-4">
+                Client Layer
+              </h4>
+              <div className="flex justify-center gap-8">
+                <ArchitectureNode
+                  component={components.find((c) => c.id === "frontend")!}
+                  isHighlighted={
+                    hoveredComponent === "frontend" ||
+                    Boolean(selectedFlow !== null &&
+                      flows
+                        .find((f) => f.id === selectedFlow)
+                        ?.path.includes("frontend"))
+                  }
+                  onHover={setHoveredComponent}
+                />
+                <ArchitectureNode
+                  component={components.find((c) => c.id === "recharts")!}
+                  isHighlighted={
+                    hoveredComponent === "recharts" ||
+                    Boolean(selectedFlow !== null &&
+                      flows
+                        .find((f) => f.id === selectedFlow)
+                        ?.path.includes("recharts"))
+                  }
+                  onHover={setHoveredComponent}
+                />
+              </div>
+            </div>
 
-          <div className="h-42 rounded-lg border border-[rgb(var(--border))] bg-[rgb(var(--bg-primary))] p-2 text-left h-[170px] overflow-y-auto">
-            <AnimatePresence mode="popLayout">
-              {cloudData.map((id) => (
-                <motion.div
-                  key={id}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  layout
-                  className="mb-1 flex items-center gap-2 rounded px-2 py-1 text-xs font-medium bg-orange-500/10 text-orange-500"
-                >
-                  <Database className="h-3 w-3" />
-                  <span>Synced to Cloud</span>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-            {cloudData.length === 0 && (
-              <p className="text-center text-xs text-[rgb(var(--text-secondary))] py-4">
-                Waiting for sync...
-              </p>
-            )}
+            {/* Connection Line */}
+            <div className="flex justify-center mb-8">
+              <div className="h-12 w-0.5 bg-[rgb(var(--border))]" />
+            </div>
+
+            {/* State Layer */}
+            <div className="mb-8">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] mb-4">
+                State Management
+              </h4>
+              <div className="flex justify-center">
+                <ArchitectureNode
+                  component={components.find((c) => c.id === "zustand")!}
+                  isHighlighted={
+                    hoveredComponent === "zustand" ||
+                    Boolean(selectedFlow !== null &&
+                      flows
+                        .find((f) => f.id === selectedFlow)
+                        ?.path.includes("zustand"))
+                  }
+                  onHover={setHoveredComponent}
+                />
+              </div>
+            </div>
+
+            {/* Connection Line */}
+            <div className="flex justify-center mb-8">
+              <div className="h-12 w-0.5 bg-[rgb(var(--border))]" />
+            </div>
+
+            {/* Local Data Layer */}
+            <div className="mb-8">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] mb-4">
+                Local Data Layer
+              </h4>
+              <div className="flex justify-center">
+                <ArchitectureNode
+                  component={components.find((c) => c.id === "dexie")!}
+                  isHighlighted={
+                    hoveredComponent === "dexie" ||
+                    Boolean(selectedFlow !== null &&
+                      flows
+                        .find((f) => f.id === selectedFlow)
+                        ?.path.includes("dexie"))
+                  }
+                  onHover={setHoveredComponent}
+                />
+              </div>
+            </div>
+
+            {/* Connection Line */}
+            <div className="flex justify-center mb-8">
+              <div className="h-12 w-0.5 bg-[rgb(var(--border))]" />
+            </div>
+
+            {/* Cloud Layer */}
+            <div className="mb-8">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] mb-4">
+                Cloud Layer
+              </h4>
+              <div className="flex justify-center">
+                <ArchitectureNode
+                  component={components.find((c) => c.id === "firebase")!}
+                  isHighlighted={
+                    hoveredComponent === "firebase" ||
+                    Boolean(selectedFlow !== null &&
+                      flows
+                        .find((f) => f.id === selectedFlow)
+                        ?.path.includes("firebase"))
+                  }
+                  onHover={setHoveredComponent}
+                />
+              </div>
+            </div>
           </div>
+        </div>
+
+        {/* Mobile View - Layered List */}
+        <div className="md:hidden space-y-8">
+          {/* Client Layer */}
+          <div className="space-y-3">
+            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] border-b border-[rgb(var(--border))] pb-2">
+              Client Layer
+            </h4>
+            <div className="grid grid-cols-1 gap-3">
+              {["frontend", "recharts"].map((id) => {
+                const component = components.find((c) => c.id === id)!;
+                const isHighlighted = hoveredComponent === id ||
+                  Boolean(selectedFlow !== null &&
+                    flows
+                      .find((f) => f.id === selectedFlow)
+                      ?.path.includes(id));
+                
+                if (selectedFlow && !isHighlighted) return null;
+
+                return (
+                  <ArchitectureNode
+                    key={id}
+                    component={component}
+                    isHighlighted={isHighlighted}
+                    onHover={setHoveredComponent}
+                    compact={false}
+                  />
+                );
+              })}
+              {!selectedFlow && null}
+            </div>
+
+          </div>
+
+          {/* State Layer */}
+          <div className="space-y-3">
+            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] border-b border-[rgb(var(--border))] pb-2">
+              State Management
+            </h4>
+            <ArchitectureNode
+              component={components.find((c) => c.id === "zustand")!}
+              isHighlighted={
+                hoveredComponent === "zustand" ||
+                Boolean(selectedFlow !== null &&
+                  flows
+                    .find((f) => f.id === selectedFlow)
+                    ?.path.includes("zustand"))
+              }
+              onHover={setHoveredComponent}
+              compact={false}
+            />
+          </div>
+
+          {/* Local Data Layer */}
+          <div className="space-y-3">
+            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] border-b border-[rgb(var(--border))] pb-2">
+              Local Data Layer
+            </h4>
+            <ArchitectureNode
+              component={components.find((c) => c.id === "dexie")!}
+              isHighlighted={
+                hoveredComponent === "dexie" ||
+                Boolean(selectedFlow !== null &&
+                  flows
+                    .find((f) => f.id === selectedFlow)
+                    ?.path.includes("dexie"))
+              }
+              onHover={setHoveredComponent}
+              compact={false}
+            />
+          </div>
+
+          {/* Cloud Layer */}
+          <div className="space-y-3">
+            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--text-secondary))] border-b border-[rgb(var(--border))] pb-2">
+              Cloud Layer
+            </h4>
+            <ArchitectureNode
+              component={components.find((c) => c.id === "firebase")!}
+              isHighlighted={
+                hoveredComponent === "firebase" ||
+                Boolean(selectedFlow !== null &&
+                  flows
+                    .find((f) => f.id === selectedFlow)
+                    ?.path.includes("firebase"))
+              }
+              onHover={setHoveredComponent}
+              compact={false}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Legend */}
+      <div className="flex flex-wrap gap-4 text-sm justify-center md:justify-start">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-blue-500/20 border border-blue-500/50" />
+          <span className="text-[rgb(var(--text-secondary))]">Client</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
+          <span className="text-[rgb(var(--text-secondary))]">Databases</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-orange-500/20 border border-orange-500/50" />
+          <span className="text-[rgb(var(--text-secondary))]">Services</span>
         </div>
       </div>
     </section>

@@ -202,7 +202,7 @@ function ProjectModalContent({
             style={{ y: contentTranslateY }}
             className="relative z-10 px-6 md:px-12 lg:px-16 pb-24 md:pb-16 max-w-full"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12 lg:gap-24">
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_350px] gap-12 lg:gap-24">
               {/* Left Column: Narrative */}
               <div className="space-y-16">
                 {/* Challenge & Solution */}
@@ -302,8 +302,8 @@ function ProjectModalContent({
               </div>
 
               {/* Right Column: Sticky Context Card (Desktop) */}
-              <div className="hidden lg:block relative">
-                <div className="sticky top-8 space-y-8">
+              <div className="hidden lg:block relative z-20">
+                <div className="sticky top-8 space-y-8 max-h-[calc(100vh-6rem)] overflow-y-auto pr-2">{" "}
                   {/* Project Stats/Info Card */}
                   <div className="rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/50 p-8 backdrop-blur-xl shadow-lg">
                     <div className="mb-8">
