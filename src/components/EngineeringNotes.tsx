@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import NoteCard from './NoteCard';
-import { notes } from '../data/notes';
+import { motion } from "framer-motion";
+import NoteCard from "./NoteCard";
+import { notes } from "../data/notes";
 
 export default function EngineeringNotes() {
   return (

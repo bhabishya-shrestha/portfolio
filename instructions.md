@@ -1,6 +1,7 @@
 # API Key Setup & Deployment Instructions
 
 ## 1. Gemini AI Configuration
+
 **Goal**: Get `VITE_GEMINI_API_KEY`.
 
 1.  Go to [Google AI Studio](https://aistudio.google.com/).
@@ -11,6 +12,7 @@
 6.  Copy the generated key -> `VITE_GEMINI_API_KEY`.
 
 ## 2. Firebase Configuration (GCP)
+
 **Goal**: Get Firebase configuration values for Auth and Database.
 
 1.  Go to [Firebase Console](https://console.firebase.google.com/).
@@ -27,14 +29,15 @@
     - Click the **Web icon** (</>) on the Project Overview to add a web app.
     - Register the app (e.g., "Portfolio").
     - Copy the `firebaseConfig` values to your `.env` file:
-        - `apiKey` -> `VITE_FIREBASE_API_KEY`
-        - `authDomain` -> `VITE_FIREBASE_AUTH_DOMAIN`
-        - `projectId` -> `VITE_FIREBASE_PROJECT_ID`
-        - `storageBucket` -> `VITE_FIREBASE_STORAGE_BUCKET`
-        - `messagingSenderId` -> `VITE_FIREBASE_MESSAGING_SENDER_ID`
-        - `appId` -> `VITE_FIREBASE_APP_ID`
+      - `apiKey` -> `VITE_FIREBASE_API_KEY`
+      - `authDomain` -> `VITE_FIREBASE_AUTH_DOMAIN`
+      - `projectId` -> `VITE_FIREBASE_PROJECT_ID`
+      - `storageBucket` -> `VITE_FIREBASE_STORAGE_BUCKET`
+      - `messagingSenderId` -> `VITE_FIREBASE_MESSAGING_SENDER_ID`
+      - `appId` -> `VITE_FIREBASE_APP_ID`
 
 ## 3. Vercel Deployment
+
 **Goal**: Host the application.
 
 1.  Push your code to a GitHub repository.
@@ -46,5 +49,6 @@
 6.  Click **"Deploy"**.
 
 ## 4. App Configuration
+
 - `VITE_APP_NAME`: Your portfolio name.
 - `VITE_APP_ENV`: `development` (local) or `production` (on Vercel).

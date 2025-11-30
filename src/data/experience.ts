@@ -17,10 +17,16 @@ export const experiences: Experience[] = [
     description: [
       "Developing AI-driven predictive analytics to forecast database health anomalies.",
       "Analyzing volume of incoming workloads to optimize system performance and reliability.",
-      "Ensuring high availability and scalability of critical financial infrastructure."
+      "Ensuring high availability and scalability of critical financial infrastructure.",
     ],
-    skills: ["AI/ML", "Predictive Analytics", "SRE", "Database", "System Design"],
-    link: "https://www.visa.com"
+    skills: [
+      "AI/ML",
+      "Predictive Analytics",
+      "SRE",
+      "Database",
+      "System Design",
+    ],
+    link: "https://www.visa.com",
   },
   {
     start: "May 2025",
@@ -30,10 +36,10 @@ export const experiences: Experience[] = [
     description: [
       "Onboarded and trained B2B customers on REST APIs and SDKs for security solutions.",
       "Performed root cause analysis for customer-escalated issues across distributed cloud and mobile platforms.",
-      "Enhanced API and SDK documentation based on client feedback to improve developer experience."
+      "Enhanced API and SDK documentation based on client feedback to improve developer experience.",
     ],
     skills: ["REST APIs", "SDKs", "Mobile Security", "B2B Support"],
-    link: "https://www.allegion.com"
+    link: "https://www.allegion.com",
   },
   {
     start: "Jun 2024",
@@ -43,10 +49,10 @@ export const experiences: Experience[] = [
     description: [
       "Produced reusable Jetpack Compose components and automated accessibility lint rules.",
       "Collaborated cross-functionally to triage accessibility issues.",
-      "Drove Agile story refinement and led peer reviews emphasizing WCAG compliance."
+      "Drove Agile story refinement and led peer reviews emphasizing WCAG compliance.",
     ],
     skills: ["Kotlin", "Jetpack Compose", "Accessibility", "WCAG", "Agile"],
-    link: "https://www.fidelity.com"
+    link: "https://www.fidelity.com",
   },
   {
     start: "May 2023",
@@ -56,10 +62,10 @@ export const experiences: Experience[] = [
     description: [
       "Performed root cause analysis for REST API defects in Java microservices.",
       "Strengthened CI/CD pipelines using Jenkins and JUnit, increasing code coverage from 65% to 88%.",
-      "Pioneered a sentiment analysis proof-of-concept using weather and social media data."
+      "Pioneered a sentiment analysis proof-of-concept using weather and social media data.",
     ],
     skills: ["Java", "Spring Boot", "Jenkins", "JUnit", "CI/CD"],
-    link: "https://www.southernglazers.com"
+    link: "https://www.southernglazers.com",
   },
   {
     start: "Aug 2022",
@@ -69,9 +75,9 @@ export const experiences: Experience[] = [
     description: [
       "Architected a cloud‑native marketplace handling full lifecycle from concept to launch.",
       "Designed GraphQL schema and REST endpoints, implemented order management flows.",
-      "Engineered a resilient AWS backend with Cognito for auth and CloudWatch for monitoring."
+      "Engineered a resilient AWS backend with Cognito for auth and CloudWatch for monitoring.",
     ],
     skills: ["React", "GraphQL", "AWS", "Cognito", "DynamoDB", "Startup"],
-    link: "#"
-  }
+    link: "#",
+  },
 ];

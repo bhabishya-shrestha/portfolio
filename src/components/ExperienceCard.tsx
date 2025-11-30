@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from "lucide-react";
 
 interface ExperienceCardProps {
   start: string;
@@ -10,12 +10,20 @@ interface ExperienceCardProps {
   link?: string;
 }
 
-export default function ExperienceCard({ start, end, role, company, description, skills, link }: ExperienceCardProps) {
+export default function ExperienceCard({
+  start,
+  end,
+  role,
+  company,
+  description,
+  skills,
+  link,
+}: ExperienceCardProps) {
   return (
     <div className="relative grid md:grid-cols-[8.5rem_1fr] gap-4 md:gap-8 group">
       {/* Date Section */}
-      <header 
-        className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[rgb(var(--text-secondary))] md:text-right" 
+      <header
+        className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-[rgb(var(--text-secondary))] md:text-right"
         aria-label={`${start} to ${end}`}
       >
         {start} — {end}
@@ -30,16 +38,20 @@ export default function ExperienceCard({ start, end, role, company, description,
       <div className="z-10 relative rounded-lg transition-all duration-300 md:p-6 md:hover:bg-[rgb(var(--bg-secondary))]/50 md:hover:shadow-sm md:border md:border-transparent md:hover:border-[rgb(var(--border))]">
         <h3 className="font-medium leading-snug text-[rgb(var(--text-primary))]">
           <div>
-            <a 
-              className="inline-flex items-baseline font-medium leading-tight text-[rgb(var(--text-primary))] hover:text-[rgb(var(--accent))] focus-visible:text-[rgb(var(--accent))] group/link text-lg" 
-              href={link || '#'} 
-              target="_blank" 
-              rel="noreferrer" 
+            <a
+              className="inline-flex items-baseline font-medium leading-tight text-[rgb(var(--text-primary))] hover:text-[rgb(var(--accent))] focus-visible:text-[rgb(var(--accent))] group/link text-lg"
+              href={link || "#"}
+              target="_blank"
+              rel="noreferrer"
               aria-label={`${role} at ${company}`}
             >
               <span className="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block"></span>
               <span>
-                {role} · <span className="inline-block text-[rgb(var(--text-secondary))] group-hover/link:text-[rgb(var(--accent))] transition-colors">{company} <ArrowUpRight className="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px" /></span>
+                {role} ·{" "}
+                <span className="inline-block text-[rgb(var(--text-secondary))] group-hover/link:text-[rgb(var(--accent))] transition-colors">
+                  {company}{" "}
+                  <ArrowUpRight className="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 motion-reduce:transition-none ml-1 translate-y-px" />
+                </span>
               </span>
             </a>
           </div>

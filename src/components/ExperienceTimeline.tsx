@@ -1,13 +1,13 @@
-import { motion } from 'framer-motion';
-import ExperienceCard from './ExperienceCard';
-import { experiences } from '../data/experience';
+import { motion } from "framer-motion";
+import ExperienceCard from "./ExperienceCard";
+import { experiences } from "../data/experience";
 
 export default function ExperienceTimeline() {
   return (
     <div className="relative space-y-12">
       {/* Vertical Timeline Line */}
-      <div 
-        className="absolute left-0 top-2 bottom-2 w-0.5 bg-[rgb(var(--border))] hidden md:block md:left-[9.5rem]" 
+      <div
+        className="absolute left-0 top-2 bottom-2 w-0.5 bg-[rgb(var(--border))] hidden md:block md:left-[9.5rem]"
         aria-hidden="true"
       ></div>
 

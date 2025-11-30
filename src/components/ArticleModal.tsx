@@ -1,7 +1,7 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Calendar, Clock, Brain } from 'lucide-react';
-import ReactMarkdown from 'react-markdown';
-import type { Note } from '../data/notes';
+import { motion, AnimatePresence } from "framer-motion";
+import { X, ExternalLink, Calendar, Clock, Brain } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import type { Note } from "../data/notes";
 
 interface ArticleModalProps {
   note: Note | null;
@@ -33,7 +33,6 @@ export default function ArticleModal({ note, onClose }: ArticleModalProps) {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-primary))] shadow-2xl">
-              
               {/* Header */}
               <div className="relative border-b border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/50 p-6 md:p-8">
                 <button
@@ -45,7 +44,10 @@ export default function ArticleModal({ note, onClose }: ArticleModalProps) {
 
                 <div className="mb-4 flex flex-wrap gap-2">
                   {note.tags.map((tag) => (
-                    <span key={tag} className="rounded-full bg-[rgb(var(--accent))]/10 px-3 py-1 text-xs font-medium text-[rgb(var(--accent))] border border-[rgb(var(--accent))]/20">
+                    <span
+                      key={tag}
+                      className="rounded-full bg-[rgb(var(--accent))]/10 px-3 py-1 text-xs font-medium text-[rgb(var(--accent))] border border-[rgb(var(--accent))]/20"
+                    >
                       {tag}
                     </span>
                   ))}
@@ -71,7 +73,9 @@ export default function ArticleModal({ note, onClose }: ArticleModalProps) {
               <div className="flex-1 overflow-y-auto p-6 md:p-8">
                 {/* Abstract */}
                 <div className="mb-8 rounded-xl bg-[rgb(var(--bg-secondary))]/30 p-6 border border-[rgb(var(--border))]">
-                  <h3 className="mb-3 text-sm font-bold uppercase tracking-widest text-[rgb(var(--text-secondary))]">Abstract</h3>
+                  <h3 className="mb-3 text-sm font-bold uppercase tracking-widest text-[rgb(var(--text-secondary))]">
+                    Abstract
+                  </h3>
                   <p className="text-lg leading-relaxed text-[rgb(var(--text-primary))]">
                     {note.abstract}
                   </p>
@@ -84,9 +88,11 @@ export default function ArticleModal({ note, onClose }: ArticleModalProps) {
                       <div className="rounded-lg bg-gradient-to-br from-purple-500/20 to-blue-500/20 p-2">
                         <Brain className="h-6 w-6 text-[rgb(var(--accent))]" />
                       </div>
-                      <h3 className="text-xl font-bold text-[rgb(var(--text-primary))]">My Takes</h3>
+                      <h3 className="text-xl font-bold text-[rgb(var(--text-primary))]">
+                        My Takes
+                      </h3>
                     </div>
-                    
+
                     <div className="prose prose-invert max-w-none prose-p:text-[rgb(var(--text-secondary))] prose-headings:text-[rgb(var(--text-primary))] prose-strong:text-[rgb(var(--text-primary))] prose-a:text-[rgb(var(--accent))]">
                       <ReactMarkdown>{note.takes}</ReactMarkdown>
                     </div>
@@ -108,7 +114,6 @@ export default function ArticleModal({ note, onClose }: ArticleModalProps) {
                   </a>
                 )}
               </div>
-
             </div>
           </motion.div>
         </>

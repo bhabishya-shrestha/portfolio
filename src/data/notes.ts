@@ -18,7 +18,8 @@ export const notes: Note[] = [
     date: "Nov 2025",
     isoDate: "2025-11-29",
     readTime: "15 min read",
-    abstract: "An exploration of using electron spin states in diamond nitrogen-vacancy centers to create stable, high-density quantum memory systems.",
+    abstract:
+      "An exploration of using electron spin states in diamond nitrogen-vacancy centers to create stable, high-density quantum memory systems.",
     tags: ["Quantum Computing", "Physics", "Memory Architecture"],
     externalLink: "https://arxiv.org/abs/2301.00001", // Placeholder link
     takes: `
@@ -33,7 +34,7 @@ Wearing my SRE hat, this looks like the ultimate "distributed system" nightmareâ
 
 ### Personal Thought
 Honestly, just the idea of trapping electrons in a diamond lattice to store a "1" or "0" is pure sci-fi coming to life. It's the kind of hardware innovation that reignites that spark of wonder I felt when I first learned how a transistor worked.
-    `
+    `,
   },
   {
     id: "2",
@@ -41,16 +42,18 @@ Honestly, just the idea of trapping electrons in a diamond lattice to store a "1
     date: "Nov 2025",
     isoDate: "2025-11-28",
     readTime: "12 min read",
-    abstract: "Analyzing the Ramanujan Summation (-1/12) and its physical interpretation in bosonic string theory dimensions.",
+    abstract:
+      "Analyzing the Ramanujan Summation (-1/12) and its physical interpretation in bosonic string theory dimensions.",
     tags: ["Physics", "Math", "Quantum Mechanics"],
-    externalLink: "https://en.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%E2%8B%AF",
+    externalLink:
+      "https://en.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%E2%8B%AF",
     takes: `
 ### The Math
 The result \`1 + 2 + 3 + ... = -1/12\` seems absurd intuitively, but in the context of analytic continuation and the Riemann Zeta function, it's a rigorous mathematical truth. It's a reminder that our "common sense" intuition often breaks down at the boundaries of infinity.
 
 ### Physics Connection
 What blows my mind is that this specific value is **required** for Bosonic String Theory to be consistent in 26 dimensions. If the sum were anything else, the theory would have anomalies that break Lorentz invariance. It's a beautiful example of how pure, abstract math dictates the fundamental laws of reality.
-    `
+    `,
   },
   {
     id: "3",
@@ -58,7 +61,8 @@ What blows my mind is that this specific value is **required** for Bosonic Strin
     date: "Sep 2025",
     isoDate: "2025-09-10",
     readTime: "5 min read",
-    abstract: "Exploring how AI-driven anomaly detection can preemptively identify database bottlenecks before they impact critical financial infrastructure.",
+    abstract:
+      "Exploring how AI-driven anomaly detection can preemptively identify database bottlenecks before they impact critical financial infrastructure.",
     tags: ["SRE", "Database", "AI/ML"],
     externalLink: "#",
     takes: `
@@ -67,6 +71,6 @@ Traditional monitoring is reactive. You get an alert *after* the CPU spikes or t
 
 ### The Solution
 By training LSTM models on historical metric data, we can forecast resource usage minutes in advance. It's not just about "predicting the future"â€”it's about buying time for auto-scalers to spin up resources *before* the load hits. This is where SRE meets Data Science.
-    `
-  }
+    `,
+  },
 ];
