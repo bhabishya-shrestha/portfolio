@@ -105,7 +105,7 @@ export const projects: Project[] = [
     role: 'Lead Architect',
     description: [
       "Architected a local-first personal finance dashboard using React, Dexie.js, and Firebase.",
-      "Implemented offline-first data sync, real-time analytics, and a beautiful Apple-inspired design."
+      "Implemented offline-first data sync, real-time analytics, and a beautiful design."
     ],
     about: "Aura Finance is a modern personal finance management application built with React, featuring a local-first architecture for instant interactions and offline capability. It allows users to track net worth, categorize transactions, and visualize spending habits with data stored securely on their device and synced to the cloud.",
     useCase: "Users want a clean, ad-free way to manage their money that works instantly even without internet. Aura provides a 'single pane of glass' for all financial accounts with powerful categorization rules and export capabilities.",

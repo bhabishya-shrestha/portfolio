@@ -1,19 +1,51 @@
+import React from 'react';
 import { Github, Linkedin, Mail, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function LeftPanel() {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleNavClick = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    e.preventDefault();
+    
+    if (id === 'notes') {
+      navigate('/notes');
+      return;
+    }
+
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: id } });
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
+
+  // Handle scroll on mount if coming from another page
+  React.useEffect(() => {
+    if (location.state && (location.state as any).scrollTo) {
+      const id = (location.state as any).scrollTo;
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+      // Clear state
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location, navigate]);
 
   const navItems = [
     { name: 'About', id: 'about' },
     { name: 'Experience', id: 'experience' },
     { name: 'Projects', id: 'projects' },
     { name: 'Skills', id: 'skills' },
+    { name: 'Engineering Notes', id: 'notes' },
   ];
 
   return (
@@ -54,15 +86,38 @@ export default function LeftPanel() {
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
               >
                 <button
-                  onClick={() => scrollToSection(item.id)}
-                  className="group flex items-center py-3 active"
+                  onClick={(e) => handleNavClick(e, item.id)}
+                  className={`group flex items-center py-3 active ${
+                    (location.pathname === '/notes' && item.id === 'notes') || 
+                    (location.pathname === '/' && item.id !== 'notes') 
+                      ? 'text-[rgb(var(--text-primary))]' 
+                      : ''
+                  }`}
                 >
-                  <span className="nav-indicator mr-4 h-px w-8 bg-[rgb(var(--text-secondary))] transition-all group-hover:w-16 group-hover:bg-[rgb(var(--text-primary))] group-focus-visible:w-16 group-focus-visible:bg-[rgb(var(--text-primary))] motion-reduce:transition-none"></span>
+                  <span className={`nav-indicator mr-4 h-px w-8 bg-[rgb(var(--text-secondary))] transition-all group-hover:w-16 group-hover:bg-[rgb(var(--text-primary))] group-focus-visible:w-16 group-focus-visible:bg-[rgb(var(--text-primary))] motion-reduce:transition-none ${
+                    (location.pathname === '/notes' && item.id === 'notes') ? 'w-16 bg-[rgb(var(--text-primary))]' : ''
+                  }`}></span>
                   <span className="nav-text text-xs font-bold uppercase tracking-widest text-[rgb(var(--text-secondary))] group-hover:text-[rgb(var(--text-primary))] group-focus-visible:text-[rgb(var(--text-primary))]">
                     {item.name}
                   </span>
                 </button>
               </motion.li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Mobile Navigation */}
+        <nav className="mt-8 block lg:hidden">
+          <ul className="flex flex-wrap gap-3">
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <button
+                  onClick={(e) => handleNavClick(e, item.id)}
+                  className="rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/50 px-4 py-2 text-sm font-medium text-[rgb(var(--text-secondary))] transition-colors hover:bg-[rgb(var(--bg-secondary))] hover:text-[rgb(var(--text-primary))]"
+                >
+                  {item.name}
+                </button>
+              </li>
             ))}
           </ul>
         </nav>
@@ -94,7 +149,7 @@ export default function LeftPanel() {
           </a>
         </li>
         <li className="mr-5 text-xs">
-          <a className="block hover:text-[rgb(var(--text-primary))] text-[rgb(var(--text-secondary))]" href="/resume.pdf" target="_blank" rel="noreferrer">
+          <a className="block hover:text-[rgb(var(--text-primary))] text-[rgb(var(--text-secondary))]" href="/assets/Resume.pdf" target="_blank" rel="noreferrer">
             <span className="sr-only">Resume</span>
             <FileText className="h-6 w-6" />
           </a>

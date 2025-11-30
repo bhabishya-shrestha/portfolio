@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { twMerge } from 'tailwind-merge';
 
-export default function ThemeToggle() {
+interface ThemeToggleProps {
+  className?: string;
+}
+
+export default function ThemeToggle({ className }: ThemeToggleProps) {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('theme') || 'dark';
@@ -27,7 +32,10 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed top-6 right-6 z-50 p-3 rounded-full glass hover:scale-110 transition-transform duration-200 shadow-lg"
+      className={twMerge(
+        "fixed top-6 right-6 z-50 p-3 rounded-full glass hover:scale-110 transition-transform duration-200 shadow-lg",
+        className
+      )}
       aria-label="Toggle Theme"
     >
       <motion.div
