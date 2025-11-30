@@ -29,11 +29,21 @@
 
   body {
     @apply bg-[rgb(var(--bg-primary))] text-[rgb(var(--text-primary))] antialiased transition-colors duration-300;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+    letter-spacing: -0.01em; /* Tighter tracking for a more modern feel */
+    line-height: 1.6; /* Improved readability */
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply tracking-tight font-bold;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply tracking-tight font-bold font-display; /* Ensure Outfit is used */
+    letter-spacing: -0.02em; /* Tighter headings */
   }
 
   /* Custom Scrollbar */
@@ -59,7 +69,7 @@
   .glass {
     @apply bg-white/70 dark:bg-zinc-900/70 backdrop-blur-lg border border-[rgb(var(--border))];
   }
-  
+
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-[rgb(var(--text-primary))] to-[rgb(var(--text-secondary))];
   }
