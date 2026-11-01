@@ -254,27 +254,46 @@ export const projects: Project[] = [
       "Local restaurants struggle to stand out and to reach corporate catering buyers. Hidden Gems gives them a place to be found, and gives diners and companies a simple, ranked way to see what's good nearby.",
     technicalSections: [
       {
+        title: "Mobile App",
+        content:
+          "A React Native app built with Expo and Redux Toolkit. It includes the city leaderboard with search, cuisine filters and an images toggle, restaurant pages with favorites and call-to-order, company group orders, and an owner hub for restaurants.",
+      },
+      {
         title: "API Design",
         content:
-          "A GraphQL schema and REST endpoints power the app, including the order management flows that connect catering clients with restaurants.",
+          "A GraphQL API on AWS Amplify (AppSync) with Amplify DataStore keeps the app in sync, backed by a set of Lambda functions in Node.js and Python for restaurants, distance lookups, group orders and email.",
+      },
+      {
+        title: "Group Orders",
+        content:
+          "A company admin creates a group order with a delivery time and an order deadline. Employees join with a code, choose an entree from the participating restaurants, and Lambda emails the final order.",
+      },
+      {
+        title: "Square Integration",
+        content:
+          "Lambda functions handle the Square OAuth token exchange and refresh, then fetch menu items and variations so restaurants can take orders through the app.",
       },
       {
         title: "Authentication & Access Control",
         content:
-          "AWS Cognito handles sign-in, with role-based access so each type of user only sees and does what they should.",
+          "AWS Cognito handles sign-in, with role-based access so diners, company admins and restaurant owners each see only what they should.",
       },
       {
         title: "Cloud Infrastructure",
         content:
-          "A resilient AWS backend built on Lambda and DynamoDB, with CloudWatch dashboards to monitor system health.",
+          "A resilient AWS backend on Lambda and DynamoDB, with CloudWatch dashboards to monitor system health.",
       },
     ],
     techStack: [
-      "React",
+      "React Native",
+      "Expo",
+      "Redux Toolkit",
       "GraphQL",
+      "AWS Amplify",
       "AWS Lambda",
       "DynamoDB",
       "Cognito",
+      "Square API",
       "CloudWatch",
     ],
     links: {},

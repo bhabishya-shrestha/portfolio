@@ -21,6 +21,7 @@ import { useEffect, useRef, useState } from "react";
 import QoltBotExperience from "./projects/QoltBotExperience";
 import AuraFinanceExperience from "./projects/AuraFinanceExperience";
 import MotherboardInspectorExperience from "./projects/MotherboardInspectorExperience";
+import HiddenGemsExperience from "./projects/HiddenGemsExperience";
 
 // Tech Stack URL Mapping
 const TECH_STACK_URLS: Record<string, string> = {
@@ -37,6 +38,11 @@ const TECH_STACK_URLS: Record<string, string> = {
   Zustand: "https://docs.pmnd.rs/zustand/getting-started/introduction",
   Supabase: "https://supabase.com",
   GraphQL: "https://graphql.org",
+  "React Native": "https://reactnative.dev",
+  Expo: "https://expo.dev",
+  "Redux Toolkit": "https://redux-toolkit.js.org",
+  "AWS Amplify": "https://aws.amazon.com/amplify/",
+  "Square API": "https://developer.squareup.com",
   DynamoDB: "https://aws.amazon.com/dynamodb",
   Cognito: "https://aws.amazon.com/cognito/",
   CloudWatch: "https://aws.amazon.com/cloudwatch/",
@@ -261,6 +267,9 @@ function ProjectModalContent({
                 {project.id === "motherboard-inspector" && (
                   <MotherboardInspectorExperience />
                 )}
+
+                {/* Custom Interactive Experience for Hidden Gems */}
+                {project.id === "hidden-gems" && <HiddenGemsExperience />}
 
                 {/* Interactive Gallery */}
                 {project.media.gallery.length > 0 && (
