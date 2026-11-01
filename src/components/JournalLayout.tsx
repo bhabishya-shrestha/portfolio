@@ -37,7 +37,7 @@ export default function JournalLayout({
   ];
 
   return (
-    <div className="min-h-screen w-full bg-[rgb(var(--bg-primary))] text-[rgb(var(--text-primary))] transition-colors duration-300 flex flex-col md:flex-row overflow-hidden">
+    <div className="min-h-dvh w-full bg-[rgb(var(--bg-primary))] text-[rgb(var(--text-primary))] transition-colors duration-300 flex flex-col md:flex-row overflow-hidden">
       {/* Slim Sidebar */}
       <motion.aside
         initial={{ x: -50, opacity: 0 }}

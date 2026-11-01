@@ -29,14 +29,18 @@ export default function ArticleModal({ note, onClose }: ArticleModalProps) {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label={note.title}
             className="fixed inset-0 z-[70] flex items-center justify-center p-4 sm:p-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-primary))] shadow-2xl">
+            <div className="relative flex max-h-[90dvh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-primary))] shadow-2xl">
               {/* Header */}
               <div className="relative border-b border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/50 p-6 md:p-8">
                 <button
                   onClick={onClose}
+                  aria-label="Close article"
                   className="absolute right-4 top-4 rounded-full p-2 text-[rgb(var(--text-secondary))] hover:bg-[rgb(var(--bg-secondary))] hover:text-[rgb(var(--text-primary))] transition-colors"
                 >
                   <X className="h-6 w-6" />

@@ -101,9 +101,13 @@ function ProjectModalContent({
   // Keyboard navigation for Lightbox
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (lightboxIndex === null) onClose();
+        else setLightboxIndex(null);
+        return;
+      }
       if (lightboxIndex === null) return;
 
-      if (e.key === "Escape") setLightboxIndex(null);
       if (e.key === "ArrowRight") {
         setLightboxIndex((prev) =>
           prev !== null && prev < project.media.gallery.length - 1
@@ -122,21 +126,27 @@ function ProjectModalContent({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxIndex, project.media.gallery.length]);
+  }, [lightboxIndex, project.media.gallery.length, onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={project.title}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+    >
       <motion.div
         layoutId={`project-${project.id}`}
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 100 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="relative w-full h-full md:h-[95vh] md:w-[95vw] md:max-w-7xl md:rounded-3xl bg-[rgb(var(--bg-primary))] shadow-2xl overflow-hidden flex flex-col ring-1 ring-white/10"
+        className="relative w-full h-full md:h-[95dvh] md:w-[95vw] md:max-w-7xl md:rounded-3xl bg-[rgb(var(--bg-primary))] shadow-2xl overflow-hidden flex flex-col ring-1 ring-white/10"
       >
         {/* Close Button - Floating & Magnetic */}
         <motion.button
           onClick={onClose}
+          aria-label="Close project details"
           whileHover={{ scale: 1.1, rotate: 90 }}
           whileTap={{ scale: 0.9 }}
           className="absolute right-4 top-4 z-[60] rounded-full bg-black/20 p-3 text-white hover:bg-black/40 transition-colors backdrop-blur-md border border-white/10"
@@ -150,7 +160,7 @@ function ProjectModalContent({
           className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth"
         >
           {/* Immersive Hero Section */}
-          <div className="relative h-[70vh] md:h-[80vh] w-full overflow-hidden">
+          <div className="relative h-[70dvh] md:h-[80dvh] w-full overflow-hidden">
             <motion.div
               style={{ scale: heroScale, opacity: heroOpacity }}
               className="absolute inset-0 w-full h-full"
@@ -260,6 +270,9 @@ function ProjectModalContent({
                         {item.type === "video" ? (
                           <video
                             src={item.url}
+                            muted
+                            playsInline
+                            preload="metadata"
                             className="h-full w-full object-cover"
                           />
                         ) : (
@@ -303,7 +316,8 @@ function ProjectModalContent({
 
               {/* Right Column: Sticky Context Card (Desktop) */}
               <div className="hidden lg:block relative z-20">
-                <div className="sticky top-8 space-y-8 max-h-[calc(100vh-6rem)] overflow-y-auto pr-2">{" "}
+                <div className="sticky top-8 space-y-8 max-h-[calc(100dvh-6rem)] overflow-y-auto pr-2">
+                  {" "}
                   {/* Project Stats/Info Card */}
                   <div className="rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/50 p-8 backdrop-blur-xl shadow-lg">
                     <div className="mb-8">
@@ -427,7 +441,7 @@ function ProjectModalContent({
               </button>
 
               <div
-                className="relative max-w-7xl max-h-[90vh] p-4"
+                className="relative max-w-7xl max-h-[90dvh] p-4"
                 onClick={(e) => e.stopPropagation()}
               >
                 {project.media.gallery[lightboxIndex].type === "video" ? (
@@ -435,13 +449,15 @@ function ProjectModalContent({
                     src={project.media.gallery[lightboxIndex].url}
                     controls
                     autoPlay
-                    className="max-h-[85vh] w-auto rounded-lg shadow-2xl"
+                    muted
+                    playsInline
+                    className="max-h-[85dvh] w-auto rounded-lg shadow-2xl"
                   />
                 ) : (
                   <img
                     src={project.media.gallery[lightboxIndex].url}
                     alt={project.media.gallery[lightboxIndex].caption}
-                    className="max-h-[85vh] w-auto rounded-lg shadow-2xl"
+                    className="max-h-[85dvh] w-auto rounded-lg shadow-2xl"
                   />
                 )}
                 {project.media.gallery[lightboxIndex].caption && (
