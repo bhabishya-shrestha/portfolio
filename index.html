@@ -4,11 +4,36 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
     <title>Bhabishya Shrestha | Engineer</title>
     <meta
       name="description"
-      content="Portfolio of Bhabishya Shrestha, a Solutions Engineer and Full Stack Developer specializing in building accessible, pixel-perfect web and mobile experiences."
+      content="Portfolio of Bhabishya Shrestha: Site Reliability Engineer at Visa, building agentic AI for database reliability, and MS in AI student at UT Austin."
     />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Bhabishya Shrestha | Engineer" />
+    <meta
+      property="og:description"
+      content="Site Reliability Engineer at Visa and MS in AI student at UT Austin. I build things for the web and mobile, and I like finding out why they break."
+    />
+    <meta name="twitter:card" content="summary" />
+    <script>
+      // Apply the saved/system theme before first paint to avoid a light flash.
+      (function () {
+        var theme = null;
+        try {
+          theme = localStorage.getItem("theme");
+        } catch (e) {}
+        if (!theme) {
+          theme =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+        }
+        document.documentElement.classList.toggle("dark", theme === "dark");
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

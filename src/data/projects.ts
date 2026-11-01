@@ -37,7 +37,7 @@ export const projects: Project[] = [
     sponsor: "Quality of Life Technologies (QoLT) Lab",
     description: [
       "Integrated OpenAI-based LLM models with FastAPI to offer quick, data-backed responses.",
-      "Built a secure React front end connected to AWS S3 for knowledge base.",
+      "Built a secure React front end connected to AWS S3 for the knowledge base and AWS Cognito for authentication.",
     ],
     about:
       'The chatbot is intended for those interested in the Quality of Life Technologies Lab (QoLT). It offers insights into the lab\'s projects and its founder, Professor Tamil. The chatbot contains a custom knowledge base uploader, where the professor can upload new and more relevant information about the lab, and the chatbot will immediately be able to discuss this new information.\n\nFrom the QoLT lab website itself: "Quality of Life Technology Laboratory’s mission is to explore technological advancements, to develop innovative methods, and to design intelligent systems for personalized health care, vital signs monitoring and disease prevention. Teaching and training students to become creative professionals in engineering innovations for health care field is an integral part of our strategy. We foster methodologies, which in collaboration with other educational, research, medical, and industrial institutions, will lead to commercial products for public use."',
@@ -121,8 +121,8 @@ export const projects: Project[] = [
     tagline: "Personal Finance Management",
     role: "Lead Architect",
     description: [
-      "Architected a local-first personal finance dashboard using React, Dexie.js, and Firebase.",
-      "Implemented offline-first data sync, real-time analytics, and a beautiful design.",
+      "Architected a local-first personal finance dashboard using React, Zustand, Dexie.js, and Firebase, deployed on Vercel.",
+      "Implemented Firebase Auth with per-user Firestore security rules, AI-assisted statement import, and real-time analytics.",
     ],
     about:
       "Aura Finance is a modern personal finance management application built with React, featuring a local-first architecture for instant interactions and offline capability. It allows users to track net worth, categorize transactions, and visualize spending habits with data stored securely on their device and synced to the cloud.",
@@ -142,7 +142,7 @@ export const projects: Project[] = [
       {
         title: "Local-First Architecture",
         content:
-          "Built on a Local-First architecture using Dexie.js (IndexedDB) for instant client-side storage and Firebase for background synchronization. This ensures the app works perfectly offline and feels native-app fast, while still keeping data backed up across devices.",
+          "Built on a Local-First architecture using Dexie.js (IndexedDB) for instant client-side storage and Firebase (Auth and Firestore) for background synchronization. Firestore security rules limit each user to their own data. This keeps the app fast and usable offline while data stays backed up across devices.",
       },
     ],
     techStack: [
@@ -188,12 +188,13 @@ export const projects: Project[] = [
   {
     id: "motherboard-inspector",
     title: "Motherboard Identifier",
-    tagline: "Automated Hardware Inspection CLI",
+    tagline: "1st Place, UT Design Expo — Automated Hardware Inspection CLI",
     role: "Computer Vision Engineer",
     sponsor: "SMS InfoComm",
     description: [
       "Engineered an automated inspection tool in Python using OpenCV and Tesseract.",
       "Achieved 100% text‑recognition accuracy on 300+ motherboard images.",
+      "Packaged the pipeline as a cross-platform CLI so technicians can batch-process images locally on Windows and Linux.",
     ],
     about:
       "This tool automates the quality assurance process for refurbished motherboards. It identifies model numbers and detects physical defects (bent pins, missing capacitors) using computer vision.",
@@ -233,6 +234,90 @@ export const projects: Project[] = [
           url: "/assets/motherboard-inspector/motherboard_id_winjfif.jpg",
           type: "image",
           caption: "Defect detection close-up",
+        },
+      ],
+    },
+  },
+  {
+    id: "hidden-gems",
+    title: "Hidden Gems",
+    tagline: "A Cloud-Native Marketplace for Local Restaurants",
+    role: "Co-Founder & Full Stack Developer",
+    description: [
+      "Architected a cloud-native marketplace connecting local restaurants with corporate catering clients, owning the full SDLC.",
+      "Designed the GraphQL schema and REST endpoints, built order management flows, and enforced role-based access with AWS Cognito.",
+    ],
+    about:
+      "Hidden Gems is a startup I co-founded to help local restaurants get discovered. The app ranks restaurants on city-based leaderboards, with photos, cuisine and price, a short blurb for each place, favorites, sharing, and one-tap call-to-order. Behind it, a marketplace connects restaurants with corporate catering clients.",
+    useCase:
+      "Local restaurants struggle to stand out and to reach corporate catering buyers. Hidden Gems gives them a place to be found, and gives diners and companies a simple, ranked way to see what's good nearby.",
+    technicalSections: [
+      {
+        title: "Mobile App",
+        content:
+          "A React Native app built with Expo and Redux Toolkit. It includes the city leaderboard with search, cuisine filters and an images toggle, restaurant pages with favorites and call-to-order, company group orders, and an owner hub for restaurants.",
+      },
+      {
+        title: "API Design",
+        content:
+          "A GraphQL API on AWS Amplify (AppSync) with Amplify DataStore keeps the app in sync, backed by a set of Lambda functions in Node.js and Python for restaurants, distance lookups, group orders and email.",
+      },
+      {
+        title: "Group Orders",
+        content:
+          "A company admin creates a group order with a delivery time and an order deadline. Employees join with a code, choose an entree from the participating restaurants, and Lambda emails the final order.",
+      },
+      {
+        title: "Square Integration",
+        content:
+          "Lambda functions handle the Square OAuth token exchange and refresh, then fetch menu items and variations so restaurants can take orders through the app.",
+      },
+      {
+        title: "Authentication & Access Control",
+        content:
+          "AWS Cognito handles sign-in, with role-based access so diners, company admins and restaurant owners each see only what they should.",
+      },
+      {
+        title: "Cloud Infrastructure",
+        content:
+          "A resilient AWS backend on Lambda and DynamoDB, with CloudWatch dashboards to monitor system health.",
+      },
+    ],
+    techStack: [
+      "React Native",
+      "Expo",
+      "Redux Toolkit",
+      "GraphQL",
+      "AWS Amplify",
+      "AWS Lambda",
+      "DynamoDB",
+      "Cognito",
+      "Square API",
+      "CloudWatch",
+    ],
+    links: {},
+    media: {
+      heroImage: "/assets/hidden-gems/overview.jpg",
+      gallery: [
+        {
+          url: "/assets/hidden-gems/overview.jpg",
+          type: "image",
+          caption: "Restaurant page, leaderboard and profile",
+        },
+        {
+          url: "/assets/hidden-gems/leaderboard.jpg",
+          type: "image",
+          caption: "City leaderboard with search and photos",
+        },
+        {
+          url: "/assets/hidden-gems/restaurant.jpg",
+          type: "image",
+          caption: "Restaurant page with directions and call-to-order",
+        },
+        {
+          url: "/assets/hidden-gems/profile.jpg",
+          type: "image",
+          caption: "Profile with favorites, sharing and help",
         },
       ],
     },

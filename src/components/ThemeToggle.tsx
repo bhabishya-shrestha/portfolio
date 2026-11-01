@@ -8,12 +8,11 @@ interface ThemeToggleProps {
 }
 
 export default function ThemeToggle({ className }: ThemeToggleProps) {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") || "dark";
-    }
-    return "dark";
-  });
+  const [theme, setTheme] = useState(() =>
+    window.document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light",
+  );
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -22,7 +21,11 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
     } else {
       root.classList.remove("dark");
     }
-    localStorage.setItem("theme", theme);
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {
+      // Storage can be blocked (private mode, in-app browsers); theme still applies.
+    }
   }, [theme]);
 
   const toggleTheme = () => {

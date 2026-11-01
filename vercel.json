@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/assets/Resume.pdf",
+      "destination": "/assets/Bhabishya_Shrestha_Resume.pdf",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",

@@ -1,15 +1,10 @@
 # API Key Setup & Deployment Instructions
 
-## 1. Gemini AI Configuration
+## 1. Secrets policy
 
-**Goal**: Get `VITE_GEMINI_API_KEY`.
-
-1.  Go to [Google AI Studio](https://aistudio.google.com/).
-2.  Sign in with your Google account.
-3.  Click **"Get API key"** (top left).
-4.  Click **"Create API key"**.
-5.  Select a project (or create a new one).
-6.  Copy the generated key -> `VITE_GEMINI_API_KEY`.
+Variables prefixed with `VITE_` are embedded in the public browser bundle, so they must never hold secrets.
+If a feature needs a secret key (e.g. an AI provider), call it from a Vercel serverless function in `/api`
+and store the key as a non-`VITE_` environment variable in Vercel.
 
 ## 2. Firebase Configuration (GCP)
 
