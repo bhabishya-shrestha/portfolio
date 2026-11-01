@@ -81,6 +81,5 @@ export const experiences: Experience[] = [
       "Engineered and maintained a resilient AWS backend (DynamoDB/Lambda) and built CloudWatch dashboards to monitor system health.",
     ],
     skills: ["React", "GraphQL", "AWS", "Cognito", "DynamoDB", "Startup"],
-    link: "#",
   },
 ];

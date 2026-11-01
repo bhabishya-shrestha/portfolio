@@ -363,8 +363,6 @@ function DashboardSimulation() {
   );
 }
 
-
-
 function ArchitectureDiagram() {
   const [selectedFlow, setSelectedFlow] = useState<string | null>(null);
   const [hoveredComponent, setHoveredComponent] = useState<string | null>(null);
@@ -379,7 +377,7 @@ function ArchitectureDiagram() {
     {
       id: "sync",
       label: "Cloud Sync",
-      path: ["dexie", "firebase"],
+      path: ["dexie", "supabase"],
       description: "Background synchronization when online",
     },
     {
@@ -416,12 +414,12 @@ function ArchitectureDiagram() {
       url: "https://dexie.org",
     },
     {
-      id: "firebase",
-      title: "Firebase",
-      desc: "Auth & Firestore",
+      id: "supabase",
+      title: "Supabase",
+      desc: "Auth & PostgreSQL (RLS)",
       icon: Cloud,
       category: "service",
-      url: "https://firebase.google.com",
+      url: "https://supabase.com",
     },
     {
       id: "recharts",
@@ -520,10 +518,12 @@ function ArchitectureDiagram() {
                   component={components.find((c) => c.id === "frontend")!}
                   isHighlighted={
                     hoveredComponent === "frontend" ||
-                    Boolean(selectedFlow !== null &&
+                    Boolean(
+                      selectedFlow !== null &&
                       flows
                         .find((f) => f.id === selectedFlow)
-                        ?.path.includes("frontend"))
+                        ?.path.includes("frontend"),
+                    )
                   }
                   onHover={setHoveredComponent}
                 />
@@ -531,10 +531,12 @@ function ArchitectureDiagram() {
                   component={components.find((c) => c.id === "recharts")!}
                   isHighlighted={
                     hoveredComponent === "recharts" ||
-                    Boolean(selectedFlow !== null &&
+                    Boolean(
+                      selectedFlow !== null &&
                       flows
                         .find((f) => f.id === selectedFlow)
-                        ?.path.includes("recharts"))
+                        ?.path.includes("recharts"),
+                    )
                   }
                   onHover={setHoveredComponent}
                 />
@@ -556,10 +558,12 @@ function ArchitectureDiagram() {
                   component={components.find((c) => c.id === "zustand")!}
                   isHighlighted={
                     hoveredComponent === "zustand" ||
-                    Boolean(selectedFlow !== null &&
+                    Boolean(
+                      selectedFlow !== null &&
                       flows
                         .find((f) => f.id === selectedFlow)
-                        ?.path.includes("zustand"))
+                        ?.path.includes("zustand"),
+                    )
                   }
                   onHover={setHoveredComponent}
                 />
@@ -581,10 +585,12 @@ function ArchitectureDiagram() {
                   component={components.find((c) => c.id === "dexie")!}
                   isHighlighted={
                     hoveredComponent === "dexie" ||
-                    Boolean(selectedFlow !== null &&
+                    Boolean(
+                      selectedFlow !== null &&
                       flows
                         .find((f) => f.id === selectedFlow)
-                        ?.path.includes("dexie"))
+                        ?.path.includes("dexie"),
+                    )
                   }
                   onHover={setHoveredComponent}
                 />
@@ -603,13 +609,15 @@ function ArchitectureDiagram() {
               </h4>
               <div className="flex justify-center">
                 <ArchitectureNode
-                  component={components.find((c) => c.id === "firebase")!}
+                  component={components.find((c) => c.id === "supabase")!}
                   isHighlighted={
-                    hoveredComponent === "firebase" ||
-                    Boolean(selectedFlow !== null &&
+                    hoveredComponent === "supabase" ||
+                    Boolean(
+                      selectedFlow !== null &&
                       flows
                         .find((f) => f.id === selectedFlow)
-                        ?.path.includes("firebase"))
+                        ?.path.includes("supabase"),
+                    )
                   }
                   onHover={setHoveredComponent}
                 />
@@ -628,12 +636,13 @@ function ArchitectureDiagram() {
             <div className="grid grid-cols-1 gap-3">
               {["frontend", "recharts"].map((id) => {
                 const component = components.find((c) => c.id === id)!;
-                const isHighlighted = hoveredComponent === id ||
-                  Boolean(selectedFlow !== null &&
-                    flows
-                      .find((f) => f.id === selectedFlow)
-                      ?.path.includes(id));
-                
+                const isHighlighted =
+                  hoveredComponent === id ||
+                  Boolean(
+                    selectedFlow !== null &&
+                    flows.find((f) => f.id === selectedFlow)?.path.includes(id),
+                  );
+
                 if (selectedFlow && !isHighlighted) return null;
 
                 return (
@@ -648,7 +657,6 @@ function ArchitectureDiagram() {
               })}
               {!selectedFlow && null}
             </div>
-
           </div>
 
           {/* State Layer */}
@@ -660,10 +668,12 @@ function ArchitectureDiagram() {
               component={components.find((c) => c.id === "zustand")!}
               isHighlighted={
                 hoveredComponent === "zustand" ||
-                Boolean(selectedFlow !== null &&
+                Boolean(
+                  selectedFlow !== null &&
                   flows
                     .find((f) => f.id === selectedFlow)
-                    ?.path.includes("zustand"))
+                    ?.path.includes("zustand"),
+                )
               }
               onHover={setHoveredComponent}
               compact={false}
@@ -679,10 +689,12 @@ function ArchitectureDiagram() {
               component={components.find((c) => c.id === "dexie")!}
               isHighlighted={
                 hoveredComponent === "dexie" ||
-                Boolean(selectedFlow !== null &&
+                Boolean(
+                  selectedFlow !== null &&
                   flows
                     .find((f) => f.id === selectedFlow)
-                    ?.path.includes("dexie"))
+                    ?.path.includes("dexie"),
+                )
               }
               onHover={setHoveredComponent}
               compact={false}
@@ -695,13 +707,15 @@ function ArchitectureDiagram() {
               Cloud Layer
             </h4>
             <ArchitectureNode
-              component={components.find((c) => c.id === "firebase")!}
+              component={components.find((c) => c.id === "supabase")!}
               isHighlighted={
-                hoveredComponent === "firebase" ||
-                Boolean(selectedFlow !== null &&
+                hoveredComponent === "supabase" ||
+                Boolean(
+                  selectedFlow !== null &&
                   flows
                     .find((f) => f.id === selectedFlow)
-                    ?.path.includes("firebase"))
+                    ?.path.includes("supabase"),
+                )
               }
               onHover={setHoveredComponent}
               compact={false}

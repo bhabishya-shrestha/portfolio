@@ -11,6 +11,7 @@ export const leadership: Experience[] = [
       "Led a board of 5 officers to organize and run professional development events, managing the chapter budget and boosting engagement among 40+ active members.",
     ],
     skills: ["Leadership", "Budgeting", "Event Planning"],
+    link: "https://www.tbp.org/home.cfm",
   },
   {
     start: "Spring 2022",
@@ -23,6 +24,7 @@ export const leadership: Experience[] = [
       "Facilitated communication between program managers and faculty advisors to align project goals with the IEEE mission.",
     ],
     skills: ["Technical Leadership", "Program Management"],
+    link: "https://www.ieeeutd.org/",
   },
   {
     start: "Spring 2021",
@@ -34,5 +36,6 @@ export const leadership: Experience[] = [
       "Arduino Robotic Arm: directed the design and assembly of a 4-axis robotic arm in C++ on an Arduino Mega 2650, with Bluetooth (HC-05) control from an Android joystick app.",
     ],
     skills: ["C++", "Arduino", "OpenCV", "IoT"],
+    link: "https://www.ieeeutd.org/",
   },
 ];

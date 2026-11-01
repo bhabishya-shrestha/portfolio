@@ -177,6 +177,7 @@ export default function HomePage() {
             {projects.map((project) => (
               <ProjectCard
                 key={project.id}
+                id={project.id}
                 title={project.title}
                 description={project.description}
                 skills={project.techStack}
