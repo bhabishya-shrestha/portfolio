@@ -19,7 +19,7 @@ export const experiences: Experience[] = [
       "Incident Automation: combining the triage tooling with historical ServiceNow ticket data to surface similar past incidents and quick SOP resolution guides on every incident.",
       "Applied ML: exploring time-series forecasting models to support capacity planning (early stage).",
       "Database Reliability: managing high-availability MSSQL clusters, including patching, replication management, and access control governance for global distributed payment systems.",
-      "Automation: building Python and Shell scripts for database reliability audits and smoke tests, supporting 99.99% availability for critical payment rails.",
+      "Automation: building Python and Shell scripts for database reliability audits and smoke tests, supporting Visa's 99.999% availability standard for critical payment systems.",
     ],
     skills: [
       "MCP",
