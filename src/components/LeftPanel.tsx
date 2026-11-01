@@ -179,7 +179,7 @@ export default function LeftPanel() {
         <li className="mr-5 text-xs">
           <a
             className="block hover:text-[rgb(var(--text-primary))] text-[rgb(var(--text-secondary))]"
-            href="/assets/Resume.pdf"
+            href="/assets/Bhabishya_Shrestha_Resume.pdf"
             target="_blank"
             rel="noreferrer"
           >
