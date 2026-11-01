@@ -21,6 +21,7 @@ import { useEffect, useRef, useState } from "react";
 import QoltBotExperience from "./projects/QoltBotExperience";
 import AuraFinanceExperience from "./projects/AuraFinanceExperience";
 import MotherboardInspectorExperience from "./projects/MotherboardInspectorExperience";
+import HiddenGemsExperience from "./projects/HiddenGemsExperience";
 
 // Tech Stack URL Mapping
 const TECH_STACK_URLS: Record<string, string> = {
@@ -36,6 +37,15 @@ const TECH_STACK_URLS: Record<string, string> = {
   "Tailwind CSS": "https://tailwindcss.com",
   Zustand: "https://docs.pmnd.rs/zustand/getting-started/introduction",
   Supabase: "https://supabase.com",
+  GraphQL: "https://graphql.org",
+  "React Native": "https://reactnative.dev",
+  Expo: "https://expo.dev",
+  "Redux Toolkit": "https://redux-toolkit.js.org",
+  "AWS Amplify": "https://aws.amazon.com/amplify/",
+  "Square API": "https://developer.squareup.com",
+  DynamoDB: "https://aws.amazon.com/dynamodb",
+  Cognito: "https://aws.amazon.com/cognito/",
+  CloudWatch: "https://aws.amazon.com/cloudwatch/",
   Recharts: "https://recharts.org/en-US/",
   Vitest: "https://vitest.dev",
   Python: "https://www.python.org",
@@ -101,9 +111,13 @@ function ProjectModalContent({
   // Keyboard navigation for Lightbox
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (lightboxIndex === null) onClose();
+        else setLightboxIndex(null);
+        return;
+      }
       if (lightboxIndex === null) return;
 
-      if (e.key === "Escape") setLightboxIndex(null);
       if (e.key === "ArrowRight") {
         setLightboxIndex((prev) =>
           prev !== null && prev < project.media.gallery.length - 1
@@ -122,21 +136,27 @@ function ProjectModalContent({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxIndex, project.media.gallery.length]);
+  }, [lightboxIndex, project.media.gallery.length, onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={project.title}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+    >
       <motion.div
         layoutId={`project-${project.id}`}
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 100 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="relative w-full h-full md:h-[95vh] md:w-[95vw] md:max-w-7xl md:rounded-3xl bg-[rgb(var(--bg-primary))] shadow-2xl overflow-hidden flex flex-col ring-1 ring-white/10"
+        className="relative w-full h-full md:h-[95dvh] md:w-[95vw] md:max-w-7xl md:rounded-3xl bg-[rgb(var(--bg-primary))] shadow-2xl overflow-hidden flex flex-col ring-1 ring-white/10"
       >
         {/* Close Button - Floating & Magnetic */}
         <motion.button
           onClick={onClose}
+          aria-label="Close project details"
           whileHover={{ scale: 1.1, rotate: 90 }}
           whileTap={{ scale: 0.9 }}
           className="absolute right-4 top-4 z-[60] rounded-full bg-black/20 p-3 text-white hover:bg-black/40 transition-colors backdrop-blur-md border border-white/10"
@@ -150,7 +170,7 @@ function ProjectModalContent({
           className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth"
         >
           {/* Immersive Hero Section */}
-          <div className="relative h-[70vh] md:h-[80vh] w-full overflow-hidden">
+          <div className="relative h-[70dvh] md:h-[80dvh] w-full overflow-hidden">
             <motion.div
               style={{ scale: heroScale, opacity: heroOpacity }}
               className="absolute inset-0 w-full h-full"
@@ -162,12 +182,17 @@ function ProjectModalContent({
                   className="h-full w-full object-cover pointer-events-none"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 />
-              ) : (
+              ) : project.media.heroImage ? (
                 <motion.img
                   layoutId={`project-image-${project.id}`}
                   src={project.media.heroImage}
                   alt={project.title}
                   className="h-full w-full object-cover"
+                />
+              ) : (
+                <div
+                  className="h-full w-full bg-gradient-to-br from-[rgb(var(--accent))]/30 via-[rgb(var(--bg-secondary))] to-[rgb(var(--bg-primary))]"
+                  aria-hidden="true"
                 />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-[rgb(var(--bg-primary))] via-[rgb(var(--bg-primary))]/40 to-transparent" />
@@ -243,46 +268,54 @@ function ProjectModalContent({
                   <MotherboardInspectorExperience />
                 )}
 
+                {/* Custom Interactive Experience for Hidden Gems */}
+                {project.id === "hidden-gems" && <HiddenGemsExperience />}
+
                 {/* Interactive Gallery */}
-                <section>
-                  <h3 className="font-display text-2xl font-bold text-[rgb(var(--text-primary))] mb-8">
-                    Project Gallery
-                  </h3>
-                  {/* Mobile: Horizontal Scroll Snap | Desktop: Grid */}
-                  <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:grid md:grid-cols-2 md:overflow-visible md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
-                    {project.media.gallery.map((item, idx) => (
-                      <motion.div
-                        key={idx}
-                        whileHover={{ scale: 1.02 }}
-                        onClick={() => setLightboxIndex(idx)}
-                        className="flex-none w-[85vw] md:w-auto snap-center group relative aspect-video overflow-hidden rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))] cursor-zoom-in"
-                      >
-                        {item.type === "video" ? (
-                          <video
-                            src={item.url}
-                            className="h-full w-full object-cover"
-                          />
-                        ) : (
-                          <img
-                            src={item.url}
-                            alt={item.caption || `Gallery ${idx + 1}`}
-                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
-                        )}
-                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                          <Maximize2 className="text-white h-8 w-8 drop-shadow-lg" />
-                        </div>
-                        {item.caption && (
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 pt-12 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                            <p className="text-sm text-white font-medium">
-                              {item.caption}
-                            </p>
+                {project.media.gallery.length > 0 && (
+                  <section>
+                    <h3 className="font-display text-2xl font-bold text-[rgb(var(--text-primary))] mb-8">
+                      Project Gallery
+                    </h3>
+                    {/* Mobile: Horizontal Scroll Snap | Desktop: Grid */}
+                    <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:grid md:grid-cols-2 md:overflow-visible md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
+                      {project.media.gallery.map((item, idx) => (
+                        <motion.div
+                          key={idx}
+                          whileHover={{ scale: 1.02 }}
+                          onClick={() => setLightboxIndex(idx)}
+                          className="flex-none w-[85vw] md:w-auto snap-center group relative aspect-video overflow-hidden rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))] cursor-zoom-in"
+                        >
+                          {item.type === "video" ? (
+                            <video
+                              src={item.url}
+                              muted
+                              playsInline
+                              preload="metadata"
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            <img
+                              src={item.url}
+                              alt={item.caption || `Gallery ${idx + 1}`}
+                              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                          )}
+                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <Maximize2 className="text-white h-8 w-8 drop-shadow-lg" />
                           </div>
-                        )}
-                      </motion.div>
-                    ))}
-                  </div>
-                </section>
+                          {item.caption && (
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 pt-12 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                              <p className="text-sm text-white font-medium">
+                                {item.caption}
+                              </p>
+                            </div>
+                          )}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </section>
+                )}
 
                 {/* Technical Deep Dive - Interactive Cards */}
                 <section className="space-y-8">
@@ -303,7 +336,8 @@ function ProjectModalContent({
 
               {/* Right Column: Sticky Context Card (Desktop) */}
               <div className="hidden lg:block relative z-20">
-                <div className="sticky top-8 space-y-8 max-h-[calc(100vh-6rem)] overflow-y-auto pr-2">{" "}
+                <div className="sticky top-8 space-y-8 max-h-[calc(100dvh-6rem)] overflow-y-auto pr-2">
+                  {" "}
                   {/* Project Stats/Info Card */}
                   <div className="rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/50 p-8 backdrop-blur-xl shadow-lg">
                     <div className="mb-8">
@@ -427,7 +461,7 @@ function ProjectModalContent({
               </button>
 
               <div
-                className="relative max-w-7xl max-h-[90vh] p-4"
+                className="relative max-w-7xl max-h-[90dvh] p-4"
                 onClick={(e) => e.stopPropagation()}
               >
                 {project.media.gallery[lightboxIndex].type === "video" ? (
@@ -435,13 +469,15 @@ function ProjectModalContent({
                     src={project.media.gallery[lightboxIndex].url}
                     controls
                     autoPlay
-                    className="max-h-[85vh] w-auto rounded-lg shadow-2xl"
+                    muted
+                    playsInline
+                    className="max-h-[85dvh] w-auto rounded-lg shadow-2xl"
                   />
                 ) : (
                   <img
                     src={project.media.gallery[lightboxIndex].url}
                     alt={project.media.gallery[lightboxIndex].caption}
-                    className="max-h-[85vh] w-auto rounded-lg shadow-2xl"
+                    className="max-h-[85dvh] w-auto rounded-lg shadow-2xl"
                   />
                 )}
                 {project.media.gallery[lightboxIndex].caption && (

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Eye } from "lucide-react";
 
 interface ProjectCardProps {
+  id: string;
   title: string;
   description: string[];
   skills: string[];
@@ -10,6 +11,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({
+  id,
   title,
   description,
   skills,
@@ -18,7 +20,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   return (
     <motion.div
-      layoutId={`project-${title.toLowerCase().replace(/\s+/g, "-")}`}
+      layoutId={`project-${id}`}
       onClick={onClick}
       whileHover={{ scale: 1.02 }}
       className="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50 cursor-pointer"
@@ -28,7 +30,7 @@ export default function ProjectCard({
       {image && (
         <div className="z-10 sm:col-span-2 mt-1">
           <motion.img
-            layoutId={`project-image-${title.toLowerCase().replace(/\s+/g, "-")}`}
+            layoutId={`project-image-${id}`}
             src={image}
             alt={title}
             className="rounded-lg border-2 border-[rgb(var(--border))/10] transition group-hover:border-[rgb(var(--border))/30] sm:order-1 sm:col-span-2 sm:translate-y-1 object-cover h-24 w-full shadow-sm"
