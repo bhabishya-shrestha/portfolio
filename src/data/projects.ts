@@ -121,8 +121,8 @@ export const projects: Project[] = [
     tagline: "Personal Finance Management",
     role: "Lead Architect",
     description: [
-      "Architected a full-stack personal finance dashboard using React, Vite, and Supabase (PostgreSQL), deployed via Vercel CI/CD.",
-      "Implemented secure OAuth and real-time data sync with Supabase Auth, using Row Level Security (RLS) for per-user data isolation.",
+      "Architected a local-first personal finance dashboard using React, Zustand, Dexie.js, and Firebase, deployed on Vercel.",
+      "Implemented Firebase Auth with per-user Firestore security rules, AI-assisted statement import, and real-time analytics.",
     ],
     about:
       "Aura Finance is a modern personal finance management application built with React, featuring a local-first architecture for instant interactions and offline capability. It allows users to track net worth, categorize transactions, and visualize spending habits with data stored securely on their device and synced to the cloud.",
@@ -142,7 +142,7 @@ export const projects: Project[] = [
       {
         title: "Local-First Architecture",
         content:
-          "Built on a Local-First architecture using Dexie.js (IndexedDB) for instant client-side storage and Supabase (PostgreSQL) for background synchronization. Supabase Auth handles OAuth sign-in, and Row Level Security policies isolate each user's data. This keeps the app fast and usable offline while data stays backed up across devices.",
+          "Built on a Local-First architecture using Dexie.js (IndexedDB) for instant client-side storage and Firebase (Auth and Firestore) for background synchronization. Firestore security rules limit each user to their own data. This keeps the app fast and usable offline while data stays backed up across devices.",
       },
     ],
     techStack: [
@@ -151,8 +151,7 @@ export const projects: Project[] = [
       "Tailwind CSS",
       "Zustand",
       "Dexie.js",
-      "Supabase",
-      "PostgreSQL",
+      "Firebase",
       "Recharts",
       "Vitest",
     ],
