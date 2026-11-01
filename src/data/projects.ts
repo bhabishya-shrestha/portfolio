@@ -279,7 +279,29 @@ export const projects: Project[] = [
     ],
     links: {},
     media: {
-      gallery: [],
+      heroImage: "/assets/hidden-gems/overview.jpg",
+      gallery: [
+        {
+          url: "/assets/hidden-gems/overview.jpg",
+          type: "image",
+          caption: "Restaurant page, leaderboard and profile",
+        },
+        {
+          url: "/assets/hidden-gems/leaderboard.jpg",
+          type: "image",
+          caption: "City leaderboard with search and photos",
+        },
+        {
+          url: "/assets/hidden-gems/restaurant.jpg",
+          type: "image",
+          caption: "Restaurant page with directions and call-to-order",
+        },
+        {
+          url: "/assets/hidden-gems/profile.jpg",
+          type: "image",
+          caption: "Profile with favorites, sharing and help",
+        },
+      ],
     },
   },
 ];
