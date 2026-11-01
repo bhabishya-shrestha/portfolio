@@ -51,18 +51,19 @@ export default function LeftPanel() {
     { name: "About", id: "about" },
     { name: "Experience", id: "experience" },
     { name: "Projects", id: "projects" },
+    { name: "Leadership", id: "leadership" },
     { name: "Skills", id: "skills" },
     { name: "Notes & Interests", id: "notes" },
   ];
 
   return (
-    <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
+    <header className="lg:sticky lg:top-0 lg:flex lg:max-h-dvh lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
       <div>
         <motion.h1
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl font-bold tracking-tight text-[rgb(var(--text-primary))] sm:text-5xl"
+          className="pr-16 text-4xl font-bold tracking-tight text-[rgb(var(--text-primary))] sm:text-5xl lg:pr-0"
         >
           <a href="/">Bhabishya Shrestha</a>
         </motion.h1>
@@ -80,8 +81,8 @@ export default function LeftPanel() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-4 max-w-xs leading-normal text-[rgb(var(--text-secondary))]"
         >
-          I build accessible, pixel-perfect, and performant experiences for the
-          web and mobile.
+          I build things for the web and mobile, and I like finding out why they
+          break.
         </motion.p>
 
         <nav className="nav hidden lg:block" aria-label="In-page jump links">

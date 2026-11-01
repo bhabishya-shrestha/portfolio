@@ -37,7 +37,7 @@ export const projects: Project[] = [
     sponsor: "Quality of Life Technologies (QoLT) Lab",
     description: [
       "Integrated OpenAI-based LLM models with FastAPI to offer quick, data-backed responses.",
-      "Built a secure React front end connected to AWS S3 for knowledge base.",
+      "Built a secure React front end connected to AWS S3 for the knowledge base and AWS Cognito for authentication.",
     ],
     about:
       'The chatbot is intended for those interested in the Quality of Life Technologies Lab (QoLT). It offers insights into the lab\'s projects and its founder, Professor Tamil. The chatbot contains a custom knowledge base uploader, where the professor can upload new and more relevant information about the lab, and the chatbot will immediately be able to discuss this new information.\n\nFrom the QoLT lab website itself: "Quality of Life Technology Laboratory’s mission is to explore technological advancements, to develop innovative methods, and to design intelligent systems for personalized health care, vital signs monitoring and disease prevention. Teaching and training students to become creative professionals in engineering innovations for health care field is an integral part of our strategy. We foster methodologies, which in collaboration with other educational, research, medical, and industrial institutions, will lead to commercial products for public use."',
@@ -121,8 +121,8 @@ export const projects: Project[] = [
     tagline: "Personal Finance Management",
     role: "Lead Architect",
     description: [
-      "Architected a local-first personal finance dashboard using React, Dexie.js, and Firebase.",
-      "Implemented offline-first data sync, real-time analytics, and a beautiful design.",
+      "Architected a full-stack personal finance dashboard using React, Vite, and Supabase (PostgreSQL), deployed via Vercel CI/CD.",
+      "Implemented secure OAuth and real-time data sync with Supabase Auth, using Row Level Security (RLS) for per-user data isolation.",
     ],
     about:
       "Aura Finance is a modern personal finance management application built with React, featuring a local-first architecture for instant interactions and offline capability. It allows users to track net worth, categorize transactions, and visualize spending habits with data stored securely on their device and synced to the cloud.",
@@ -142,7 +142,7 @@ export const projects: Project[] = [
       {
         title: "Local-First Architecture",
         content:
-          "Built on a Local-First architecture using Dexie.js (IndexedDB) for instant client-side storage and Firebase for background synchronization. This ensures the app works perfectly offline and feels native-app fast, while still keeping data backed up across devices.",
+          "Built on a Local-First architecture using Dexie.js (IndexedDB) for instant client-side storage and Supabase (PostgreSQL) for background synchronization. Supabase Auth handles OAuth sign-in, and Row Level Security policies isolate each user's data. This keeps the app fast and usable offline while data stays backed up across devices.",
       },
     ],
     techStack: [
@@ -151,7 +151,8 @@ export const projects: Project[] = [
       "Tailwind CSS",
       "Zustand",
       "Dexie.js",
-      "Firebase",
+      "Supabase",
+      "PostgreSQL",
       "Recharts",
       "Vitest",
     ],
@@ -188,12 +189,13 @@ export const projects: Project[] = [
   {
     id: "motherboard-inspector",
     title: "Motherboard Identifier",
-    tagline: "Automated Hardware Inspection CLI",
+    tagline: "1st Place, UT Design Expo — Automated Hardware Inspection CLI",
     role: "Computer Vision Engineer",
     sponsor: "SMS InfoComm",
     description: [
       "Engineered an automated inspection tool in Python using OpenCV and Tesseract.",
       "Achieved 100% text‑recognition accuracy on 300+ motherboard images.",
+      "Packaged the pipeline as a cross-platform CLI so technicians can batch-process images locally on Windows and Linux.",
     ],
     about:
       "This tool automates the quality assurance process for refurbished motherboards. It identifies model numbers and detects physical defects (bent pins, missing capacitors) using computer vision.",
