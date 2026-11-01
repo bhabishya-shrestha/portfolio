@@ -36,6 +36,10 @@ const TECH_STACK_URLS: Record<string, string> = {
   "Tailwind CSS": "https://tailwindcss.com",
   Zustand: "https://docs.pmnd.rs/zustand/getting-started/introduction",
   Supabase: "https://supabase.com",
+  GraphQL: "https://graphql.org",
+  DynamoDB: "https://aws.amazon.com/dynamodb",
+  Cognito: "https://aws.amazon.com/cognito/",
+  CloudWatch: "https://aws.amazon.com/cloudwatch/",
   Recharts: "https://recharts.org/en-US/",
   Vitest: "https://vitest.dev",
   Python: "https://www.python.org",
@@ -172,12 +176,17 @@ function ProjectModalContent({
                   className="h-full w-full object-cover pointer-events-none"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 />
-              ) : (
+              ) : project.media.heroImage ? (
                 <motion.img
                   layoutId={`project-image-${project.id}`}
                   src={project.media.heroImage}
                   alt={project.title}
                   className="h-full w-full object-cover"
+                />
+              ) : (
+                <div
+                  className="h-full w-full bg-gradient-to-br from-[rgb(var(--accent))]/30 via-[rgb(var(--bg-secondary))] to-[rgb(var(--bg-primary))]"
+                  aria-hidden="true"
                 />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-[rgb(var(--bg-primary))] via-[rgb(var(--bg-primary))]/40 to-transparent" />
@@ -254,48 +263,50 @@ function ProjectModalContent({
                 )}
 
                 {/* Interactive Gallery */}
-                <section>
-                  <h3 className="font-display text-2xl font-bold text-[rgb(var(--text-primary))] mb-8">
-                    Project Gallery
-                  </h3>
-                  {/* Mobile: Horizontal Scroll Snap | Desktop: Grid */}
-                  <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:grid md:grid-cols-2 md:overflow-visible md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
-                    {project.media.gallery.map((item, idx) => (
-                      <motion.div
-                        key={idx}
-                        whileHover={{ scale: 1.02 }}
-                        onClick={() => setLightboxIndex(idx)}
-                        className="flex-none w-[85vw] md:w-auto snap-center group relative aspect-video overflow-hidden rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))] cursor-zoom-in"
-                      >
-                        {item.type === "video" ? (
-                          <video
-                            src={item.url}
-                            muted
-                            playsInline
-                            preload="metadata"
-                            className="h-full w-full object-cover"
-                          />
-                        ) : (
-                          <img
-                            src={item.url}
-                            alt={item.caption || `Gallery ${idx + 1}`}
-                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
-                        )}
-                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                          <Maximize2 className="text-white h-8 w-8 drop-shadow-lg" />
-                        </div>
-                        {item.caption && (
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 pt-12 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                            <p className="text-sm text-white font-medium">
-                              {item.caption}
-                            </p>
+                {project.media.gallery.length > 0 && (
+                  <section>
+                    <h3 className="font-display text-2xl font-bold text-[rgb(var(--text-primary))] mb-8">
+                      Project Gallery
+                    </h3>
+                    {/* Mobile: Horizontal Scroll Snap | Desktop: Grid */}
+                    <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:grid md:grid-cols-2 md:overflow-visible md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
+                      {project.media.gallery.map((item, idx) => (
+                        <motion.div
+                          key={idx}
+                          whileHover={{ scale: 1.02 }}
+                          onClick={() => setLightboxIndex(idx)}
+                          className="flex-none w-[85vw] md:w-auto snap-center group relative aspect-video overflow-hidden rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))] cursor-zoom-in"
+                        >
+                          {item.type === "video" ? (
+                            <video
+                              src={item.url}
+                              muted
+                              playsInline
+                              preload="metadata"
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            <img
+                              src={item.url}
+                              alt={item.caption || `Gallery ${idx + 1}`}
+                              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                          )}
+                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <Maximize2 className="text-white h-8 w-8 drop-shadow-lg" />
                           </div>
-                        )}
-                      </motion.div>
-                    ))}
-                  </div>
-                </section>
+                          {item.caption && (
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 pt-12 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                              <p className="text-sm text-white font-medium">
+                                {item.caption}
+                              </p>
+                            </div>
+                          )}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </section>
+                )}
 
                 {/* Technical Deep Dive - Interactive Cards */}
                 <section className="space-y-8">

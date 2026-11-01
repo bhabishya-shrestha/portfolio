@@ -239,4 +239,47 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
+    id: "hidden-gems",
+    title: "Hidden Gems",
+    tagline: "A Cloud-Native Marketplace for Local Restaurants",
+    role: "Co-Founder & Full Stack Developer",
+    description: [
+      "Architected a cloud-native marketplace connecting local restaurants with corporate catering clients, owning the full SDLC.",
+      "Designed the GraphQL schema and REST endpoints, built order management flows, and enforced role-based access with AWS Cognito.",
+    ],
+    about:
+      "Hidden Gems is a startup I co-founded to help local restaurants get discovered. The app ranks restaurants on city-based leaderboards, with photos, cuisine and price, a short blurb for each place, favorites, sharing, and one-tap call-to-order. Behind it, a marketplace connects restaurants with corporate catering clients.",
+    useCase:
+      "Local restaurants struggle to stand out and to reach corporate catering buyers. Hidden Gems gives them a place to be found, and gives diners and companies a simple, ranked way to see what's good nearby.",
+    technicalSections: [
+      {
+        title: "API Design",
+        content:
+          "A GraphQL schema and REST endpoints power the app, including the order management flows that connect catering clients with restaurants.",
+      },
+      {
+        title: "Authentication & Access Control",
+        content:
+          "AWS Cognito handles sign-in, with role-based access so each type of user only sees and does what they should.",
+      },
+      {
+        title: "Cloud Infrastructure",
+        content:
+          "A resilient AWS backend built on Lambda and DynamoDB, with CloudWatch dashboards to monitor system health.",
+      },
+    ],
+    techStack: [
+      "React",
+      "GraphQL",
+      "AWS Lambda",
+      "DynamoDB",
+      "Cognito",
+      "CloudWatch",
+    ],
+    links: {},
+    media: {
+      gallery: [],
+    },
+  },
 ];
