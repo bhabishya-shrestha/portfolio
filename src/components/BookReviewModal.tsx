@@ -164,87 +164,87 @@ function BookInteractiveSection({ bookId }: { bookId: string }) {
 const BEYOND_ORDER_RULES = [
   {
     num: 1,
-    title: "Social Institutions & Renewal",
+    title: "Social Institutions & Creative Achievement",
     category: "aligned",
-    badge: "Aligned",
-    take: "True. Tearing down structures blindly takes effort and causes second-order implications that are often worse, with very little benefit.",
+    badge: "Agreed",
+    take: "True. Tearing things down takes effort and usually creates worse side effects with not much benefit.",
   },
   {
     num: 2,
-    title: "Singular Aim & Vision",
+    title: "Aim Single-Mindedly",
     category: "aligned",
-    badge: "Aligned",
-    take: "Coincides directly with Think and Grow Rich and The Alchemist—a clear daily aim bends probabilities in your favor.",
+    badge: "Agreed",
+    take: "True, and it lines up directly with Think and Grow Rich and The Alchemist.",
   },
   {
     num: 3,
-    title: "Facing What's in the Fog",
+    title: "Don't Hide Things in the Fog",
     category: "aligned",
     badge: "Practical",
-    take: "Essential in financial planning and engineering. Ignoring uncomfortable realities is like fighting someone in the dark.",
+    take: "True, especially with financial planning. Ignoring it is like fighting in the dark.",
   },
   {
     num: 4,
-    title: "Abandoned Responsibility",
+    title: "Responsibility & Opportunity",
     category: "focus",
-    badge: "Active Core Focus",
-    take: "Applied at work and in my homelab: if a responsibility is too hard to maintain consistently, don't brute-force willpower—re-engineer the task to make it easier to do. Currently navigating this while leading a project and compiling peers' work around a shared vision.",
+    badge: "Active Focus",
+    take: "Applied at work and in my homelab: if a responsibility is too hard to stay consistent with, make the task easier to do instead of brute-forcing willpower. Currently navigating this while leading a project and compiling peers' work around one vision.",
   },
   {
     num: 5,
-    title: "Living in Integrity",
+    title: "Don't Do What You Hate",
     category: "tough",
     badge: "Hard to Follow",
-    take: "Very easy to agree with in principle, much harder to uphold consistently under real-world pressure.",
+    take: "Easy to agree with, hard to actually follow.",
   },
   {
     num: 6,
-    title: "Shedding Rigid Ideology",
+    title: "Abandon Ideology",
     category: "aligned",
-    badge: "Growth Mindset",
-    take: "All about neuroplasticity. We are creatures of habit, so keeping a learning mindset is a deliberate practice to avoid becoming rigid.",
+    badge: "Neuroplasticity",
+    take: "We are creatures of habit, so keeping a learning mindset takes deliberate effort if you don't want to get rigid.",
   },
   {
     num: 7,
-    title: "Commitment to Mastery",
+    title: "Work Hard on One Thing",
     category: "focus",
-    badge: "Homelab Ethos",
-    take: "This is the exact mindset behind my homelab—going all-in on systems, automation, and infrastructure to see how far competence scales.",
+    badge: "Homelab",
+    take: "That is basically what I try to do with my homelab.",
   },
   {
     num: 8,
-    title: "Cultivating Aesthetic Spaces",
+    title: "Make One Room Beautiful",
     category: "aligned",
     badge: "Daily Life",
-    take: "Easy to set up once, hard to maintain continuously—but having an intentional space makes everyday life worth living.",
+    take: "Easy to do once, hard to keep up, but it makes life worth living.",
   },
   {
     num: 9,
-    title: "Resolving Old Resentment",
+    title: "Resolving Old Stuff",
     category: "tough",
     badge: "Forward Bias",
-    take: "My instinct is to drop old ideologies and nostalgia, cut out the noise, and keep moving forward—only stopping to unpack the past if it blocks progress.",
+    take: "Hard to do. My instinct is to drop old ideologies and nostalgia, cut the noise, and keep moving forward, only stopping to unpack the past if it blocks me.",
   },
   {
     num: 10,
-    title: "Relational Intimacy",
+    title: "Romance & Marriage",
     category: "aligned",
     badge: "At 24",
-    take: "At 24, this is a chapter of life I know I am still too young to fully appreciate.",
+    take: "At 24, I am honestly too young to really understand this one yet.",
   },
   {
     num: 11,
-    title: "Rejecting Cynicism",
+    title: "Don't Get Bitter or Cynical",
     category: "tough",
     badge: "2/10 (Nov 2026)",
-    take: "The hardest rule for me to maintain consistently. Rating myself 2/10 as of 11/15/2026—actively working on it through journaling and perspective-taking.",
+    take: "The hardest one for me to keep up. I'd give myself a 2/10 as of 11/15/2026, and I'm trying to improve through things like journaling.",
   },
   {
     num: 12,
-    title: "Gratitude Amid Hardship",
+    title: "Be Grateful Anyway",
     category: "focus",
     badge: "Daily Practice",
-    take: "Something I deliberately try to practice and stay consistent with every day.",
+    take: "Something I try to do and stay consistent with every day.",
   },
 ];
 
@@ -343,26 +343,26 @@ const WEALTH_PILLARS = [
   {
     id: "focus",
     label: "Focus",
-    type: "Logical / Systematic",
-    detail: "High-leverage skill building and career momentum. Straightforward to execute once you choose your lane.",
+    type: "Logical",
+    detail: "Picking a lane and building skills. Pretty logical, so staying consistent with it isn't the hardest part.",
   },
   {
     id: "diversification",
     label: "Diversification",
-    type: "Logical / Systematic",
-    detail: "Asset allocation rules you can set and automate. Prompted me to scrutinize my 80% US / 20% International equity split.",
+    type: "Logical",
+    detail: "Spreading risk systematically. Got me questioning my 80% US / 20% International split and whether it's too US-heavy.",
   },
   {
     id: "stoicism",
     label: "Stoicism",
-    type: "Mental Endurance",
-    detail: "Hardest to stay consistent on. Resisting lifestyle creep and staying calm during drawdowns is purely psychological.",
+    type: "Mental",
+    detail: "Way harder to stay consistent with because it's all in your head. Not panicking or inflating your lifestyle takes real discipline.",
   },
   {
     id: "time",
     label: "Time",
-    type: "Mental Endurance",
-    detail: "Decades of compounding require patience. Being in my 20s is an edge—if I stay disciplined through slow cycles.",
+    type: "Mental",
+    detail: "Playing the long game over decades. Being in my 20s helps, as long as I'm ready for slower 4 to 5% years too.",
   },
 ];
 
@@ -462,8 +462,8 @@ function AlgebraOfWealthSimulator() {
           />
           <p className="text-[11px] text-[rgb(var(--text-secondary))]">
             {usWeight >= 80
-              ? "Heavy US concentration — higher upside if US dominance holds, higher single-market risk."
-              : "More balanced global exposure — cushions single-country valuation compression."}
+              ? "Heavy US tilt. Great if the US keeps booming, risky if the next 20 years average 4 to 5%."
+              : "More balanced global split to cushion single-market risk."}
           </p>
         </div>
       </div>
@@ -514,8 +514,8 @@ function AlchemistLens() {
         </p>
         <p className="text-sm leading-relaxed text-[rgb(var(--text-secondary))]">
           {lens === "first"
-            ? "Originally, it felt like the classic cliché: 'the journey matters more than the destination.' Inspiring, but abstract."
-            : "Now it's about self-understanding and actually inhabiting the good moments *while they are happening*, rather than chasing the next milestone and only appreciating life in hindsight."}
+            ? "Originally I just got the surface-level idea that the journey matters more than the destination, without really applying it to my life."
+            : "Now it's about knowing myself and actually enjoying the good moments while they are happening, instead of only appreciating them afterward."}
         </p>
       </div>
 
@@ -523,7 +523,7 @@ function AlchemistLens() {
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-[rgb(var(--text-primary))] flex items-center gap-1.5">
             <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-            Think & Grow Rich Connection (Mental Magnetism)
+            Think & Grow Rich Connection
           </span>
           <div className="flex gap-1">
             <button
@@ -534,7 +534,7 @@ function AlchemistLens() {
                   : "text-[rgb(var(--text-secondary))]"
               }`}
             >
-              Directed Aspiration
+              Positive Focus
             </button>
             <button
               onClick={() => setPolarity("negative")}
@@ -544,14 +544,14 @@ function AlchemistLens() {
                   : "text-[rgb(var(--text-secondary))]"
               }`}
             >
-              Unchecked Self-Doubt
+              Negative Spiral
             </button>
           </div>
         </div>
         <p className="text-xs leading-relaxed text-[rgb(var(--text-secondary))] rounded-lg bg-[rgb(var(--bg-primary))]/60 p-3 border border-[rgb(var(--border))]">
           {polarity === "positive"
-            ? "Holding an aspiration in your mind every single day increases the odds it materializes—your attention filters opportunities and compounds effort far better than navigating blindly."
-            : "The flip side: that same mechanism works against you unintentionally when negative self-talk or dwelling on bad situations takes over."}
+            ? "If you really think about an aspiration every day, it's way more likely to happen than just drifting blindly."
+            : "It cuts both ways though. When I feel bad or think negatively about a situation or myself, it can hurt me without me even meaning to."}
         </p>
       </div>
     </div>
@@ -563,22 +563,22 @@ const CASTES = [
     id: "red",
     name: "Reds & LowColors",
     color: "text-rose-400 border-rose-500/40 bg-rose-500/10",
-    bookRole: "Laboring beneath Mars' surface, convinced their sacrifice builds a future they'll never inherit.",
-    realParallel: "The bottom leg of a K-shaped economy: wages stagnating against asset inflation while mobility narrows.",
+    bookRole: "Doing the hardest labor at the bottom while being told it's for a future they'll never see.",
+    realParallel: "The bottom half of a K-shaped economy where wages struggle to keep up with rising asset prices.",
   },
   {
     id: "gold",
     name: "Golds & Peerless",
     color: "text-amber-400 border-amber-500/40 bg-amber-500/10",
-    bookRole: "Ruling class educated in power, strategy, and entitlement—convinced hierarchy is natural law.",
-    realParallel: "Concentrated capital and institutional gatekeeping where compounding assets outpace labor income.",
+    bookRole: "Sitting at the top with all the power, convinced the hierarchy is just how the world works.",
+    realParallel: "Concentrated wealth and gatekeeping where owning capital pulls further away from regular income.",
   },
   {
     id: "darrow",
-    name: "Darrow (Eren Yeager Drive)",
+    name: "Main Character (Eren Yeager Energy)",
     color: "text-purple-400 border-purple-500/40 bg-purple-500/10",
-    bookRole: "Brash, relentless infiltration from the inside—willing to burn peace to break a rigged machine.",
-    realParallel: "The personal drive to achieve financial freedom in your 20s and refuse to be boxed in by default trajectories.",
+    bookRole: "Brash, stubborn, and willing to break the whole system from the inside.",
+    realParallel: "Relating to that drive in your 20s when you're pushing for financial freedom and refusing to stay boxed in.",
   },
 ];
 

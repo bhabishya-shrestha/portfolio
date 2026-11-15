@@ -63,13 +63,13 @@ export const books: Book[] = [
     date: "2026-11-10",
     review: {
       summary:
-        "A visceral look at caste hierarchies, societal friction, and the relentless, brash drive required to break through rigid systems.",
+        "Re-reading this in my 20s hits differently: the brash main character reminds me of Eren Yeager, and the caste system feels a lot like a K-shaped economy.",
       notesMarkdown: `
-### Eren Yeager Energy in Deep Space
-Darrow's fierce, uncompromising mindset immediately evokes the raw, brash drive of Eren Yeager from *Attack on Titan*. That refusal to accept subjugation—and the willingness to sacrifice personal peace to dismantle an oppressive order—drives the pulse of the story.
+### Eren Yeager Energy in Space
+The main character has that same brash, stubborn drive as Eren Yeager from *Attack on Titan*, and I honestly relate to it. He refuses to just accept the hand he was dealt and is willing to burn everything down to change it.
 
-### Caste Systems, Power & The Modern K-Shaped Economy
-Reading this in my 20s while pursuing financial independence, the book transcends space fantasy. The color-coded society (Reds breaking their backs in the depths while Golds sit atop immense wealth and control) mirrors contemporary conversations around wealth disparity and the growing K-shaped economic divide. It asks difficult questions about what mobility actually demands when systems are designed to keep power concentrated.
+### Caste Systems and the K-Shaped Economy
+Reading this again while in my 20s and working toward financial freedom, the caste system and power dynamics stand out a lot more. Seeing Reds stuck at the bottom while Golds hoard everything feels uncomfortably close to real-world wealth disparity and a K-shaped economy.
       `,
     },
   },
@@ -82,15 +82,15 @@ Reading this in my 20s while pursuing financial independence, the book transcend
     date: "2026-11-05",
     review: {
       summary:
-        "Re-reading from a deeper vantage point: moving beyond the cliché of 'the journey' to truly inhabit the present and channel singular aspiration.",
+        "First time I read it as 'enjoy the journey.' Now it's more about knowing yourself and actually enjoying good moments while they happen, not just looking back.",
       notesMarkdown: `
-### Beyond the Surface Cliché
-When I first read *The Alchemist*, I took away the standard, surface-level message that the journey matters more than the destination. Re-reading it now as a practicing engineer and graduate student, it hits on a much deeper frequency: it is about **self-awareness and actually inhabiting the good moments while they are happening**, rather than only appreciating them in hindsight.
+### Actually Enjoying the Moment
+Originally, I took the surface-level lesson from *The Alchemist*: the journey matters more than the destination. Re-reading it now, it's more about understanding yourself and learning to enjoy the good moments *while they are actually happening*, instead of rushing to the next goal and only appreciating them afterward.
 
-### Gravitational Pull & Negative Self-Talk (Think and Grow Rich)
-Santiago's Personal Legend directly connects with Napoleon Hill's *Think and Grow Rich* (which I read around Dec 2022). If you obsess over an aspiration every single day with singular clarity, the probability of reaching it rises dramatically—the universe really does begin to align around your focus. 
+### The Think and Grow Rich Connection
+I really do believe the idea that if you think about a goal every day, it's much more likely to happen than just drifting blindly. It reminds me a lot of *Think and Grow Rich* (which I read back in Dec 2022). 
 
-However, there is an equal and opposite danger: that same mental magnetism can affect you negatively without intention when you dwell in anxiety, feel bad about a situation, or let self-doubt take the steering wheel. Directing that focus is a lifelong practice.
+The catch is it works both ways. I've noticed how that same habit can hurt me unintentionally when I'm in a bad headspace or thinking negatively about myself or a situation.
       `,
     },
   },
@@ -111,15 +111,15 @@ However, there is an equal and opposite danger: that same mental magnetism can a
     date: "2026-10-01",
     review: {
       summary:
-        "A blueprint for long-term wealth: recognizing that Stoicism and Time require far greater psychological endurance than Focus and Diversification.",
+        "Focus and diversification are logical and easy to automate. Stoicism and time are the hard part because they're purely mental.",
       notesMarkdown: `
-### The Mental Filter: Stoicism & Time vs. Focus & Diversification
-In Galloway's formula \`Wealth = Focus + (Stoicism × Time × Diversification)\`, setting up asset allocation (Diversification) and developing specialized skills (Focus) are logical, systematic, and relatively straightforward to execute consistently. 
+### Logic vs. Mentality
+In Galloway's formula \`Wealth = Focus + (Stoicism × Time × Diversification)\`, focus and diversification are pretty logical. Once you set up a system, sticking to them isn't that hard.
 
-**Stoicism and Time are the real trial.** They are purely mental. Resisting lifestyle creep, not chasing hype, and remaining emotionally level through market volatility across decades is where most people falter.
+Stoicism and time are way harder to stay consistent with because they're completely mental.
 
-### Re-evaluating the 80/20 Allocation
-After reading this, I re-evaluated my portfolio (currently an 80/20 split between US and international equities). While I am in my 20s and the US market has had an incredible four-decade run, overweighting domestic stocks carries risk. Grounding my expectations means being prepared for a 4–5% annualized real return over the next 20 years rather than banking on constant hyper-growth.
+### Thinking Twice About 80/20
+Diversification is the big thing I kept thinking about afterward. I still hold an 80/20 split (80% US stocks, 20% international), and I know that's heavily weighted and risky. US stocks have had an insane 40-year run, so even in my 20s, I want to be mentally and financially ready for 4 to 5% average growth over the next 20 years instead of assuming the boom lasts forever.
       `,
     },
   },
@@ -132,22 +132,22 @@ After reading this, I re-evaluated my portfolio (currently an 80/20 split betwee
     date: "2025-02-10",
     review: {
       summary:
-        "A personal breakdown of all 12 rules—navigating leadership, resisting cynicism, and designing sustainable habits over brute force.",
+        "My honest take on all 12 rules right now: making hard responsibilities easier to do, leading a project at work, and working on cynicism (2/10).",
       notesMarkdown: `
-### 12 Rules: A Personal Performance Breakdown
+### My Take on the 12 Rules
 
-1. **Social Institutions & Creative Achievement:** True. Tearing down structures blindly causes far worse second-order fallout with little upside.
-2. **Singular Aim & Self-Image:** Aligns directly with *Think and Grow Rich* and *The Alchemist*. Clear daily focus bends probabilities in your favor.
-3. **Facing What Is Hidden in the Fog:** Vital in financial planning and architecture. Ignoring hard realities is like fighting an opponent in pitch-black darkness.
-4. **Opportunity Lurks Where Responsibility Is Abdicated:** **Active Core Focus.** Rather than trying to brute-force consistency, *if a task is too hard to maintain, re-engineer it to make it easier to do.* As a technical lead coordinating peers while keeping sight of the overarching vision, I am actively learning how to steer without micromanaging.
-5. **Living in Integrity (Refusing to do what you hate):** Easy to agree on in theory; demanding to execute in high-pressure environments.
-6. **Shedding Ideology & Maintaining Neuroplasticity:** We are creatures of habit, but cultivating neuroplasticity and an open learning mindset prevents ossification.
-7. **Complete Commitment to Mastery:** That intensity is the exact principle driving my deep dive into homelab infrastructure, AI, and systems reliability.
-8. **Cultivating Aesthetic Spaces:** Easy to create initially, difficult to maintain consistently, but brings sanity and makes everyday work worth living.
-9. **Resolving Resentment:** My default instinct is forward momentum—cutting out the noise and abandoning dead weight, only stopping to dissect the past if it physically prevents moving forward.
-10. **Protecting Relational Intimacy:** At 24, this is a wisdom dimension I recognize I am still growing into.
-11. **Rejecting Bitterness & Cynicism:** **My toughest continuous struggle.** I rate my current performance here at **2/10 (Nov 2026)**. Guarding against cynicism when systems break requires deliberate counter-measures like daily journaling and perspective-taking.
-12. **Gratitude in the Face of Hardship:** A foundational baseline habit I deliberately practice every day.
+1. **Social institutions & creative achievement:** True. Tearing things down takes effort and usually creates worse side effects with not much benefit.
+2. **Aim single-mindedly:** True, and it lines up with *Think and Grow Rich*.
+3. **Don't hide unwanted things in the fog:** True, especially for things like financial planning. Ignoring it is like fighting in the dark.
+4. **Opportunity lurks where responsibility is abdicated:** I apply this at work and with my homelab. For me it means: *if a responsibility is too hard to stay consistent with, make the task easier to do* instead of trying to brute-force willpower. At work, I'm leading a project where I have to compile other people's work while keeping one vision, so I'm actively learning this in real time.
+5. **Don't do what you hate:** Easy to agree with, hard to actually follow.
+6. **Abandon ideology:** Comes down to neuroplasticity. We're creatures of habit, so keeping a learning mindset takes effort if you don't want to get rigid.
+7. **Work as hard as you can on one thing:** That's basically what I try to do with my homelab.
+8. **Make one room beautiful:** Easy to do once, hard to keep up, but it makes daily life worth living.
+9. **Resolving old stuff:** Hard to do. My default is to drop old ideologies and nostalgia, cut the noise, and keep moving forward, only unpacking the past if it's actually blocking me.
+10. **Romance & marriage:** At 24, I'm honestly too young to really understand this one yet.
+11. **Don't get bitter or cynical:** The hardest one for me to keep up. I'd give myself a **2/10 as of Nov 2026**, and I'm trying to get better at it through things like journaling.
+12. **Be grateful in spite of suffering:** Something I try to stay consistent with every day.
       `,
     },
   },
