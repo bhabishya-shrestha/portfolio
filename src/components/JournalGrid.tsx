@@ -16,6 +16,19 @@ export default function JournalGrid({
   const handleItemClick = (item: Note | Book | Game | Channel) => {
     if ("takes" in item) {
       setSelectedNote(item as Note);
+    } else if ("review" in item && (item as Book).review) {
+      const book = item as Book;
+      setSelectedNote({
+        id: `book-${book.id}`,
+        title: `${book.title} — Review & Reflection`,
+        date: book.date,
+        isoDate: book.date,
+        readTime: "5 min reflection",
+        abstract: book.review?.summary || `Notes & takeaways on ${book.title} by ${book.author}.`,
+        tags: ["Book Review", book.status, book.author],
+        externalLink: book.link,
+        takes: book.review?.notesMarkdown,
+      });
     } else if (item.link) {
       window.open(item.link, "_blank");
     }
@@ -51,16 +64,25 @@ export default function JournalGrid({
                       <div className="rounded-lg bg-emerald-500/10 p-2 text-emerald-500">
                         <BookOpen className="h-6 w-6" />
                       </div>
-                      {item.link && (
+                      {item.review ? (
+                        <span className="text-xs font-mono font-medium text-[rgb(var(--accent))] flex items-center gap-1">
+                          Read Review →
+                        </span>
+                      ) : item.link ? (
                         <ArrowUpRight className="h-4 w-4 text-[rgb(var(--text-secondary))] opacity-0 transition-opacity group-hover:opacity-100" />
-                      )}
+                      ) : null}
                     </div>
-                    <h3 className="mt-4 text-lg font-bold text-[rgb(var(--text-primary))]">
+                    <h3 className="mt-4 text-lg font-bold text-[rgb(var(--text-primary))] group-hover:text-[rgb(var(--accent))] transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-sm text-[rgb(var(--text-secondary))]">
                       {item.author}
                     </p>
+                    {item.review && (
+                      <p className="mt-3 text-xs leading-relaxed text-[rgb(var(--text-secondary))] line-clamp-2">
+                        {item.review.summary}
+                      </p>
+                    )}
                     <div className="mt-4 flex items-center gap-2">
                       <span
                         className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
@@ -73,6 +95,11 @@ export default function JournalGrid({
                       >
                         {item.status}
                       </span>
+                      {item.review && (
+                        <span className="inline-flex items-center rounded-full bg-[rgb(var(--accent))]/10 px-2 py-1 text-xs font-medium text-[rgb(var(--accent))]">
+                          Interactive Reflection
+                        </span>
+                      )}
                     </div>
                   </div>
                 ) : "platform" in item ? (
