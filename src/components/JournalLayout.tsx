@@ -76,7 +76,7 @@ export default function JournalLayout({
                 Notes & Interests
               </h1>
               <span className="rounded-full bg-[rgb(var(--accent))]/10 px-2 py-0.5 text-xs font-mono text-[rgb(var(--accent))]">
-                v2.1
+                v2.2
               </span>
             </div>
 
