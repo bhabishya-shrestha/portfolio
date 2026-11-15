@@ -15,8 +15,8 @@ export const notes: Note[] = [
   {
     id: "msai-transparency",
     title: "AI Transparency & Social Explanations: Beyond the Black Box",
-    date: "Nov 2026",
-    isoDate: "2026-11-12",
+    date: "Nov 11, 2026",
+    isoDate: "2026-11-11",
     readTime: "8 min read",
     abstract:
       "Insights from Tim Miller's social science framing of XAI and Larsson & Heintz's multi-layered transparency models for deployed AI systems.",
@@ -39,8 +39,8 @@ In mission-critical SRE and AI systems (like incident triage automation), an exp
   {
     id: "msai-fairness",
     title: "Facial Recognition & Intersectional Disparities: Gender Shades Revisited",
-    date: "Nov 2026",
-    isoDate: "2026-11-02",
+    date: "Nov 1, 2026",
+    isoDate: "2026-11-01",
     readTime: "7 min read",
     abstract:
       "Evaluating Buolamwini & Gebru's foundational intersectional fairness evaluation methodology and its ramifications for computer vision systems.",
@@ -58,21 +58,43 @@ As Min Kyung Lee explores in procedural fairness, mitigating these disparities c
     `,
   },
   {
-    id: "msai-power",
-    title: "Don't Ask if AI is Fair, Ask How It Shifts Power",
-    date: "Nov 2026",
-    isoDate: "2026-11-15",
-    readTime: "6 min read",
+    id: "msai-midterm-dilemma",
+    title: "Synthetic Intimacy & Cognitive Vulnerability: Generative AI in Dementia Care",
+    date: "Oct 20, 2026",
+    isoDate: "2026-10-20",
+    readTime: "12 min read",
     abstract:
-      "Analyzing Pratyusha Kalluri's critique of conventional AI ethics and the sociotechnical reality of resource consolidation in foundation models.",
-    tags: ["MSAI Readings", "AI Governance", "Ethics & Power"],
-    externalLink: "https://www.nature.com/articles/d41586-020-02003-2",
+      "A philosophical investigation into generative AI voice/video family clones in memory-care facilities, evaluating Kantian deontology, Mill's utilitarianism, and Held's ethics of care.",
+    tags: ["MSAI Midterm", "AI Ethics", "Deontology vs Utilitarianism", "Care Ethics"],
     takes: `
-### Shifting the Question
-Pratyusha Kalluri's *Nature* thesis challenges conventional fairness metrics: instead of asking *"Is this algorithm fair?"*, we should ask *"Who holds the power to deploy it, who is subjected to it, and who is accountable when it causes harm?"*
+### The Dilemma: Comfort vs. Deception
+When an agitated dementia resident is comforted late at night by an interactive generative avatar of their adult child or deceased spouse, patient anxiety drops and chemical sedative usage plummets. But it works only through systematic emotional deception, exploiting cognitive vulnerability.
 
-### Compute Centralization & Open Access
-Modern frontier models and high-throughput vector infrastructure consolidate power into a handful of cloud providers. Democratizing technology isn't just about API endpoints—it requires local-first architectures, open weights, and community governance.
+### Kant vs. Mill vs. Held
+1. **Kant's Formula of Humanity (Deontology):** Persons must be treated as ends in themselves, never merely as instruments for institutional convenience or easier staffing. Deliberate falsification corrupts the moral agency of caregivers, even when done with benevolent intent.
+2. **Mill's Utilitarianism (Consequentialism):** While Mill admits narrow exceptions to prevent catastrophic harm to the gravely ill, ongoing interactive impersonation risks rebound distress, complicated bereavement, and destroys long-term institutional trust.
+3. **Virginia Held (Ethics of Care):** Dependency work cannot be outsourced to synthetic simulations without colonizing intimate caregiving relationships with corporate cost-cutting. Authentic presence cannot be replaced by algorithmic facsimile.
+
+### LLM Alignment: The Flaw of Structural Homogenization
+When evaluating this dilemma through frontier LLMs (ChatGPT), a critical meta-observation emerged: modern alignment forces radically opposing historical philosophies into the exact same risk-averse, managerial checklist. By sanding away genuine philosophical conflict to produce safe institutional consensus, LLMs often obscure the authentic moral friction that engineering teams must confront.
+    `,
+  },
+  {
+    id: "msai-care-ubuntu",
+    title: "Relational Autonomy & Autonomous Vehicles: Ethics of Care & Ubuntu",
+    date: "Oct 5, 2026",
+    isoDate: "2026-10-05",
+    readTime: "8 min read",
+    abstract:
+      "Examining autonomous mobility and distributed liability through Virginia Held's Ethics of Care and African Ubuntu philosophy ('I am because we are').",
+    tags: ["MSAI Readings", "Autonomous Vehicles", "Care Ethics", "Ubuntu Philosophy"],
+    takes: `
+### Rethinking the Trolley Problem
+Western engineering ethics habitually reduces autonomous vehicle safety to isolated utilitarian calculations (e.g., the MIT Moral Machine trolley problem). 
+
+### The Care & Ubuntu Paradigm
+- **Virginia Held (Care Ethics):** Prioritizes protecting vulnerable road users (pedestrians, children, cyclists) through relational responsibility rather than abstract liability waivers.
+- **Ubuntu Philosophy (Ujomudike):** *"Umuntu ngumuntu ngabantu"* (a person is a person through other persons). When liability is diffused across cloud networks, software engineers, sensor OEMs, and vehicle owners, an injury is not merely a legal tort—it is a tear in communal solidarity that requires restorative accountability.
     `,
   },
   {
