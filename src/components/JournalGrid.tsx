@@ -4,7 +4,7 @@ import NoteCard from "./NoteCard";
 import ArticleModal from "./ArticleModal";
 import type { Book, Game, Channel } from "../data/personal";
 import type { Note } from "../data/notes";
-import { BookOpen, Gamepad2, Youtube, ArrowUpRight } from "lucide-react";
+import { BookOpen, Gamepad2, Youtube, ArrowUpRight, Trophy, Clock } from "lucide-react";
 
 export default function JournalGrid({
   items,
@@ -15,7 +15,6 @@ export default function JournalGrid({
 
   const handleItemClick = (item: Note | Book | Game | Channel) => {
     if ("takes" in item) {
-      // Check if it's a Note
       setSelectedNote(item as Note);
     } else if (item.link) {
       window.open(item.link, "_blank");
@@ -27,7 +26,6 @@ export default function JournalGrid({
       <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
         <AnimatePresence mode="popLayout">
           {items.map((item) => {
-            // Generate a unique key based on item type and ID to prevent collisions
             let uniqueKey = item.id;
             if ("readTime" in item) uniqueKey = `note-${item.id}`;
             else if ("author" in item) uniqueKey = `book-${item.id}`;
@@ -45,7 +43,6 @@ export default function JournalGrid({
                 className="break-inside-avoid cursor-pointer"
                 onClick={() => handleItemClick(item)}
               >
-                {/* Render different cards based on item type */}
                 {"readTime" in item ? (
                   <NoteCard note={item as Note} />
                 ) : "author" in item ? (
@@ -91,9 +88,41 @@ export default function JournalGrid({
                     <h3 className="mt-4 text-lg font-bold text-[rgb(var(--text-primary))]">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-[rgb(var(--text-secondary))]">
-                      {item.platform}
-                    </p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="text-xs font-mono font-medium uppercase tracking-wider text-[rgb(var(--accent))]">
+                        {item.platform}
+                      </span>
+                      {item.hoursPlayed !== undefined && (
+                        <span className="text-xs text-[rgb(var(--text-secondary))] flex items-center gap-1">
+                          • <Clock className="h-3 w-3 inline" /> {item.hoursPlayed} hrs
+                        </span>
+                      )}
+                    </div>
+
+                    {item.trophies && (
+                      <div className="mt-3 flex items-center gap-3 text-xs text-[rgb(var(--text-secondary))] bg-[rgb(var(--bg-primary))]/60 rounded-lg p-2 border border-[rgb(var(--border))]">
+                        <Trophy className="h-4 w-4 text-amber-400" />
+                        <span className="font-medium text-[rgb(var(--text-primary))]">
+                          {item.trophies.total} Trophies
+                        </span>
+                        {item.trophies.gold !== undefined && (
+                          <span className="text-amber-400 font-medium">🥇 {item.trophies.gold}</span>
+                        )}
+                        {item.trophies.silver !== undefined && (
+                          <span className="text-slate-300 font-medium">🥈 {item.trophies.silver}</span>
+                        )}
+                        {item.trophies.bronze !== undefined && (
+                          <span className="text-amber-600 font-medium">🥉 {item.trophies.bronze}</span>
+                        )}
+                      </div>
+                    )}
+
+                    {item.highlight && !item.trophies && (
+                      <p className="mt-3 text-xs text-[rgb(var(--text-secondary))]">
+                        {item.highlight}
+                      </p>
+                    )}
+
                     <div className="mt-4 flex items-center gap-2">
                       <span
                         className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${

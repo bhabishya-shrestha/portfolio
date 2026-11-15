@@ -4,7 +4,6 @@ import {
   Home,
   Book,
   Gamepad2,
-  Youtube,
   Terminal,
   ArrowDownUp,
 } from "lucide-react";
@@ -30,10 +29,9 @@ export default function JournalLayout({
 
   const navItems = [
     { id: "all", icon: Terminal, label: "All" },
-    { id: "engineering", icon: Terminal, label: "Engineering" },
+    { id: "engineering", icon: Terminal, label: "Engineering & Papers" },
     { id: "library", icon: Book, label: "Library" },
     { id: "gaming", icon: Gamepad2, label: "Gaming" },
-    { id: "media", icon: Youtube, label: "Media" },
   ];
 
   return (

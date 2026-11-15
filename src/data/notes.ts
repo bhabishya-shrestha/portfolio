@@ -13,6 +13,69 @@ export interface Note {
 
 export const notes: Note[] = [
   {
+    id: "msai-transparency",
+    title: "AI Transparency & Social Explanations: Beyond the Black Box",
+    date: "Nov 2026",
+    isoDate: "2026-11-12",
+    readTime: "8 min read",
+    abstract:
+      "Insights from Tim Miller's social science framing of XAI and Larsson & Heintz's multi-layered transparency models for deployed AI systems.",
+    tags: ["MSAI Readings", "Explainable AI", "AI Ethics", "System Transparency"],
+    externalLink: "https://doi.org/10.1016/j.artint.2018.07.007",
+    takes: `
+### What the Literature Gets Right
+In Week 12 of UT Austin's Ethics in AI course, Tim Miller (*Explanation in Artificial Intelligence: Insights from the Social Sciences*) points out what engineers routinely overlook: **explanations are conversational, selective, and contrastive**. People do not want a complete feature attribution graph (like raw SHAP/LIME values); they ask *"Why event P rather than event Q?"*
+
+### Larsson & Heintz's Dimensions
+Larsson & Heintz distinguish between:
+1. **Data transparency:** Provenance, labeling bias, and training distribution shifts.
+2. **Algorithmic transparency:** Model architecture, optimization objectives, and objective loss design.
+3. **Sociotechnical transparency:** How the model interacts with human operators in real-world feedback loops.
+
+### The Engineering Takeaway
+In mission-critical SRE and AI systems (like incident triage automation), an explanation that dumps internal model state is useless during an outage. An actionable explanation must answer the contrastive question: *"Why did the agent classify this cluster as an I/O bottleneck instead of network latency?"* Designing for explainability means designing for human interaction, not just publishing weights.
+    `,
+  },
+  {
+    id: "msai-fairness",
+    title: "Facial Recognition & Intersectional Disparities: Gender Shades Revisited",
+    date: "Nov 2026",
+    isoDate: "2026-11-02",
+    readTime: "7 min read",
+    abstract:
+      "Evaluating Buolamwini & Gebru's foundational intersectional fairness evaluation methodology and its ramifications for computer vision systems.",
+    tags: ["MSAI Readings", "Computer Vision", "Fairness & Bias", "AI Ethics"],
+    externalLink: "https://proceedings.mlr.press/v81/buolamwini18a.html",
+    takes: `
+### Intersectional Error Surfaces
+Joy Buolamwini and Timnit Gebru's *Gender Shades* study demonstrated that overall benchmark error rates mask catastrophic failures on intersectional subgroups—specifically darker-skinned female faces compared to lighter-skinned male faces.
+
+### Vision Engineering Reality
+Having built computer vision inspection pipelines (like our Motherboard Identifier tool with OpenCV and OCR), it is obvious how easily illumination variance and edge contrast thresholds fail when the training distribution lacks edge-case coverage. In automated quality control, an imbalance leads to false defect flags; in human-facing surveillance or biometrics, it leads to systemic bias and harm.
+
+### Procedural vs. Distributive Mitigation
+As Min Kyung Lee explores in procedural fairness, mitigating these disparities cannot simply be an afterthought re-weighting of loss functions. Fairness must be audited at the data collection protocol, validation benchmark stratification, and continuous production monitoring phases.
+    `,
+  },
+  {
+    id: "msai-power",
+    title: "Don't Ask if AI is Fair, Ask How It Shifts Power",
+    date: "Nov 2026",
+    isoDate: "2026-11-15",
+    readTime: "6 min read",
+    abstract:
+      "Analyzing Pratyusha Kalluri's critique of conventional AI ethics and the sociotechnical reality of resource consolidation in foundation models.",
+    tags: ["MSAI Readings", "AI Governance", "Ethics & Power"],
+    externalLink: "https://www.nature.com/articles/d41586-020-02003-2",
+    takes: `
+### Shifting the Question
+Pratyusha Kalluri's *Nature* thesis challenges conventional fairness metrics: instead of asking *"Is this algorithm fair?"*, we should ask *"Who holds the power to deploy it, who is subjected to it, and who is accountable when it causes harm?"*
+
+### Compute Centralization & Open Access
+Modern frontier models and high-throughput vector infrastructure consolidate power into a handful of cloud providers. Democratizing technology isn't just about API endpoints—it requires local-first architectures, open weights, and community governance.
+    `,
+  },
+  {
     id: "1",
     title: "Quantum Memory: Storing Data in Electron Spins",
     date: "Nov 2025",
@@ -21,7 +84,7 @@ export const notes: Note[] = [
     abstract:
       "An exploration of using electron spin states in diamond nitrogen-vacancy centers to create stable, high-density quantum memory systems.",
     tags: ["Quantum Computing", "Physics", "Memory Architecture"],
-    externalLink: "https://arxiv.org/abs/2301.00001", // Placeholder link
+    externalLink: "https://arxiv.org/abs/2006.01218",
     takes: `
 ### The Engineer's Perspective
 As a computer engineer, the shift from charge-based memory (DRAM/Flash) to spin-based memory is a paradigm shift. We're talking about potentially **orders of magnitude higher density** and lower power consumption. The challenge, of course, is coherence time—keeping that state stable at room temperature.
@@ -64,7 +127,7 @@ What blows my mind is that this specific value is **required** for Bosonic Strin
     abstract:
       "Exploring how AI-driven anomaly detection can preemptively identify database bottlenecks before they impact critical financial infrastructure.",
     tags: ["SRE", "Database", "AI/ML"],
-    externalLink: "#",
+    externalLink: "https://www.usenix.org/conference/srecon23americas",
     takes: `
 ### The Problem
 Traditional monitoring is reactive. You get an alert *after* the CPU spikes or the latency breaches the SLA. In high-frequency financial systems, that's too late.
