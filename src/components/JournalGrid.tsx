@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import NoteCard from "./NoteCard";
 import ArticleModal from "./ArticleModal";
+import BookReviewModal from "./BookReviewModal";
 import type { Book, Game, Channel } from "../data/personal";
 import type { Note } from "../data/notes";
 import { BookOpen, Gamepad2, Youtube, ArrowUpRight, Trophy, Clock } from "lucide-react";
@@ -12,23 +13,13 @@ export default function JournalGrid({
   items: (Note | Book | Game | Channel)[];
 }) {
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
   const handleItemClick = (item: Note | Book | Game | Channel) => {
     if ("takes" in item) {
       setSelectedNote(item as Note);
     } else if ("review" in item && (item as Book).review) {
-      const book = item as Book;
-      setSelectedNote({
-        id: `book-${book.id}`,
-        title: `${book.title} — Review & Reflection`,
-        date: book.date,
-        isoDate: book.date,
-        readTime: "5 min reflection",
-        abstract: book.review?.summary || `Notes & takeaways on ${book.title} by ${book.author}.`,
-        tags: ["Book Review", book.status, book.author],
-        externalLink: book.link,
-        takes: book.review?.notesMarkdown,
-      });
+      setSelectedBook(item as Book);
     } else if (item.link) {
       window.open(item.link, "_blank");
     }
@@ -189,6 +180,7 @@ export default function JournalGrid({
       </div>
 
       <ArticleModal note={selectedNote} onClose={() => setSelectedNote(null)} />
+      <BookReviewModal book={selectedBook} onClose={() => setSelectedBook(null)} />
     </>
   );
 }

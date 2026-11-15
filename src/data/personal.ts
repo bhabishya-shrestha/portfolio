@@ -193,10 +193,10 @@ export const games: Game[] = [
   {
     id: "4",
     title: "Hades II",
-    platform: "PC",
+    platform: "PS5",
     status: "Playing",
     hoursPlayed: 1.5,
-    highlight: "Early Access",
+    highlight: "1.5 hrs logged • 2 sessions (Homelab auto-synced)",
     link: "https://www.supergiantgames.com/games/hades-ii/",
     date: "2026-11-06",
   },
