@@ -50,10 +50,13 @@ export default function JournalLayout({
           <Home className="h-5 w-5" />
         </button>
 
-        <div className="hidden md:flex flex-col gap-6">
+        <div className="hidden md:flex flex-col items-center gap-6">
           <div className="h-px w-8 bg-[rgb(var(--border))]" />
           {/* Vertical Text */}
-          <div className="writing-vertical-rl text-xs font-mono uppercase tracking-widest text-[rgb(var(--text-secondary))] opacity-50">
+          <div
+            style={{ writingMode: "vertical-rl" }}
+            className="rotate-180 whitespace-nowrap text-xs font-mono uppercase tracking-[0.2em] text-[rgb(var(--text-secondary))] opacity-80"
+          >
             Electronic Journal
           </div>
         </div>
