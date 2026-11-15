@@ -2,7 +2,7 @@ import { useState } from "react";
 import JournalLayout from "../components/JournalLayout";
 import JournalGrid from "../components/JournalGrid";
 import { notes } from "../data/notes";
-import { books, games, channels } from "../data/personal";
+import { books, games } from "../data/personal";
 
 export default function NotesPage() {
   const [activeTab, setActiveTab] = useState("all");
@@ -20,11 +20,8 @@ export default function NotesPage() {
       case "gaming":
         items = [...games];
         break;
-      case "media":
-        items = [...channels];
-        break;
       default:
-        items = [...notes, ...books, ...games, ...channels];
+        items = [...notes, ...books, ...games];
     }
 
     return items.sort((a, b) => {

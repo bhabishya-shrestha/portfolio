@@ -4,7 +4,6 @@ import {
   Home,
   Book,
   Gamepad2,
-  Youtube,
   Terminal,
   ArrowDownUp,
 } from "lucide-react";
@@ -30,10 +29,9 @@ export default function JournalLayout({
 
   const navItems = [
     { id: "all", icon: Terminal, label: "All" },
-    { id: "engineering", icon: Terminal, label: "Engineering" },
+    { id: "engineering", icon: Terminal, label: "Engineering & Papers" },
     { id: "library", icon: Book, label: "Library" },
     { id: "gaming", icon: Gamepad2, label: "Gaming" },
-    { id: "media", icon: Youtube, label: "Media" },
   ];
 
   return (
@@ -52,10 +50,13 @@ export default function JournalLayout({
           <Home className="h-5 w-5" />
         </button>
 
-        <div className="hidden md:flex flex-col gap-6">
+        <div className="hidden md:flex flex-col items-center gap-6">
           <div className="h-px w-8 bg-[rgb(var(--border))]" />
           {/* Vertical Text */}
-          <div className="writing-vertical-rl text-xs font-mono uppercase tracking-widest text-[rgb(var(--text-secondary))] opacity-50">
+          <div
+            style={{ writingMode: "vertical-rl" }}
+            className="rotate-180 whitespace-nowrap text-xs font-mono uppercase tracking-[0.2em] text-[rgb(var(--text-secondary))] opacity-80"
+          >
             Electronic Journal
           </div>
         </div>
@@ -75,7 +76,7 @@ export default function JournalLayout({
                 Notes & Interests
               </h1>
               <span className="rounded-full bg-[rgb(var(--accent))]/10 px-2 py-0.5 text-xs font-mono text-[rgb(var(--accent))]">
-                v2.1
+                v2.2
               </span>
             </div>
 
