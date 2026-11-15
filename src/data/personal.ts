@@ -132,7 +132,7 @@ Diversification is the big thing I kept thinking about afterward. I still hold a
     date: "2025-02-10",
     review: {
       summary:
-        "My honest take on all 12 rules right now: making hard responsibilities easier to do, leading a project at work, and working on cynicism (2/10).",
+        "My take on all 12 rules right now: making hard responsibilities easier to do, leading a project at work, and working on cynicism (2/10).",
       notesMarkdown: `
 ### My Take on the 12 Rules
 
@@ -148,6 +148,27 @@ Diversification is the big thing I kept thinking about afterward. I still hold a
 10. **Romance & marriage:** At 24, I'm honestly too young to really understand this one yet.
 11. **Don't get bitter or cynical:** The hardest one for me to keep up. I'd give myself a **2/10 as of Nov 2026**, and I'm trying to get better at it through things like journaling.
 12. **Be grateful in spite of suffering:** Something I try to stay consistent with every day.
+      `,
+    },
+  },
+  {
+    id: "7",
+    title: "Think and Grow Rich",
+    author: "Napoleon Hill",
+    status: "Read",
+    link: "https://www.amazon.com/Think-Grow-Rich-Landmark-Bestseller/dp/1585424331",
+    date: "2022-12-15",
+    review: {
+      summary:
+        "The most profound book I read in college while building my startup. It still drives my retire-early mindset and how I shape my thoughts and circle.",
+      notesMarkdown: `
+### College, Startup & Early Retirement
+I read this back in December 2022 while building my startup (Hidden Gems), and it was the most profound book I read in college. It fueled how I worked: I constantly thought through and lived inside our app, picturing how customers and clients would actually use it. Now, that same mindset largely fuels my retire-early goals.
+
+### Shaping Your Thoughts & Circle
+Two things from the book stuck with me long term: **who you surround yourself with** and **autosuggestion**. 
+
+I genuinely believe that steering your thoughts toward your hopes, goals, and dreams, and surrounding yourself with the right people, is one of the strongest strategies for actually getting there. Just like I noticed with *The Alchemist*, it works both ways: if you let negative thoughts or bad situations take over, it can work against you without you even meaning to.
       `,
     },
   },

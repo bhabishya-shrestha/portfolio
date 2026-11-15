@@ -148,6 +148,8 @@ export default function BookReviewModal({ book, onClose }: BookReviewModalProps)
 
 function BookInteractiveSection({ bookId }: { bookId: string }) {
   switch (bookId) {
+    case "7":
+      return <ThinkAndGrowRichExplorer />;
     case "6":
       return <BeyondOrderExplorer />;
     case "5":
@@ -629,6 +631,73 @@ function RedRisingCasteMap() {
           </p>
         </div>
       </div>
+    </div>
+  );
+}
+
+const HILL_PILLARS = [
+  {
+    id: "startup",
+    label: "Startup & Early Retirement",
+    when: "Dec 2022 -> Now",
+    take: "Read it in college while building Hidden Gems. I lived through our app and pictured how customers and clients would use it every day. Now that same drive fuels my retire-early mindset.",
+  },
+  {
+    id: "circle",
+    label: "Who You Surround Yourself With",
+    when: "Environment",
+    take: "Being intentional about the people around you. Your circle shapes what feels normal, what you aim for, and how you handle setbacks.",
+  },
+  {
+    id: "autosuggestion",
+    label: "Autosuggestion & Thoughts",
+    when: "Daily Practice",
+    take: "Directing your thoughts toward your hopes, goals, and dreams actually shifts how you act. It works both ways though, so you have to catch negative self-talk early.",
+  },
+];
+
+function ThinkAndGrowRichExplorer() {
+  const [selected, setSelected] = useState("startup");
+  const active = HILL_PILLARS.find((p) => p.id === selected) || HILL_PILLARS[0];
+
+  return (
+    <div className="rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/30 p-5 space-y-4">
+      <div className="flex items-center gap-2">
+        <Sparkles className="h-5 w-5 text-amber-400" />
+        <h3 className="text-sm font-bold uppercase tracking-wider text-[rgb(var(--text-primary))]">
+          How It Applied (Dec 2022 to Now)
+        </h3>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+        {HILL_PILLARS.map((pillar) => (
+          <button
+            key={pillar.id}
+            onClick={() => setSelected(pillar.id)}
+            className={`rounded-xl p-3 text-left border transition-all ${
+              selected === pillar.id
+                ? "border-amber-500/50 bg-amber-500/10 text-amber-400"
+                : "border-[rgb(var(--border))] bg-[rgb(var(--bg-primary))]/60 text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--text-primary))]"
+            }`}
+          >
+            <span className="text-[10px] font-mono uppercase tracking-wider opacity-80 block mb-0.5">
+              {pillar.when}
+            </span>
+            <span className="text-xs font-bold block">{pillar.label}</span>
+          </button>
+        ))}
+      </div>
+
+      <motion.div
+        key={active.id}
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-primary))]/80 p-4"
+      >
+        <p className="text-sm leading-relaxed text-[rgb(var(--text-primary))]">
+          {active.take}
+        </p>
+      </motion.div>
     </div>
   );
 }
