@@ -7,8 +7,7 @@ interface NoteCardProps {
 
 export default function NoteCard({ note }: NoteCardProps) {
   return (
-    <a
-      href={note.link || "#"}
+    <div
       className="group relative flex flex-col justify-between rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-secondary))]/30 p-6 transition-all hover:bg-[rgb(var(--bg-secondary))]/50 hover:shadow-md hover:scale-[1.02]"
     >
       <div>
@@ -42,6 +41,6 @@ export default function NoteCard({ note }: NoteCardProps) {
           </span>
         ))}
       </div>
-    </a>
+    </div>
   );
 }
